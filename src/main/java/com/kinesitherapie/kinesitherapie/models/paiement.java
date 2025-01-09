@@ -1,11 +1,10 @@
 package com.kinesitherapie.kinesitherapie.models;
 
-import com.kinesitherapie.kinesitherapie.common.BaseEntity;
-
-import jakarta.persistence.*;
-import lombok.*;
-import lombok.experimental.SuperBuilder;
-
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Getter
 @Setter
@@ -13,18 +12,16 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class rendez_vous {
+public class paiement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private String Date ;
+    private double montant ;
     @Column(nullable = false)
-    private String heure;
-    @Column(nullable = false)
-    private String statut;
+    private String date;
     @ManyToOne
     @JoinColumn(name = "patient_id", nullable = false)
-    private patient patient;  
+    private patient patient;
 
 }
