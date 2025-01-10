@@ -38,6 +38,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
                         .requestMatchers("/acount").permitAll()
                         .requestMatchers("/acount/login").permitAll()
                         .requestMatchers("/acount/register").permitAll()
+                        .requestMatchers("/acount/patient").permitAll()
                         .anyRequest().authenticated() 
                 )
                                           

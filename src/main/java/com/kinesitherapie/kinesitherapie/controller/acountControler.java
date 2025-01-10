@@ -2,6 +2,7 @@ package com.kinesitherapie.kinesitherapie.controller;
 
 import java.time.Instant;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,14 +22,17 @@ import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.kinesitherapie.kinesitherapie.repostry.userrepositry;
 import org.springframework.web.bind.annotation.RestController;
 import com.kinesitherapie.kinesitherapie.models.user;
 import com.kinesitherapie.kinesitherapie.models.registerDLO;
+import com.kinesitherapie.kinesitherapie.repostry.*;
 import com.kinesitherapie.kinesitherapie.models.loginDLO;
-import com.kinesitherapie.kinesitherapie.userrepositry;
+import com.kinesitherapie.kinesitherapie.models.patient;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 
 import jakarta.validation.Valid;
@@ -42,6 +46,9 @@ public class acountControler {
     private String issuer;
  @Autowired
  private userrepositry userrepositry; 
+
+@Autowired
+private patient_Repostry patient_Repostry;
 
   @Autowired
   private AuthenticationManager authenticationManager;
@@ -152,4 +159,12 @@ public class acountControler {
      return encoder.encode(parms).getTokenValue();  
     }
 
+    @GetMapping("/patient")
+    public List<patient> getPatient(){
+      return patient_Repostry.findAll();
+    }
+
+
+
+    
 }

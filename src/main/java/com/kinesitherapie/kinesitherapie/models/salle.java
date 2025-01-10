@@ -18,7 +18,7 @@ public class salle {
     @Column(unique = true)
     private int nombre_machines ;
     @Column(unique = true)
-    private String nombre_lits;
+    private int nombre_lits;
     //genrer getters and setters
     public int getId() {
         return id;
@@ -38,10 +38,10 @@ public class salle {
     public void setnombre_lits(int nombre_machines ) {
         this.nombre_machines  = nombre_machines ;
     }
-    public String getnombre_lits () {
+    public int getnombre_lits () {
         return nombre_lits ;
     }
-    public void setType(String nombre_lits ) {
+    public void setType(int nombre_lits ) {
         this.nombre_lits  = nombre_lits ;
     }
 

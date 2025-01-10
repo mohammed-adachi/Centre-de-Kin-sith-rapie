@@ -7,9 +7,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import com.kinesitherapie.kinesitherapie.userrepositry;
 import com.kinesitherapie.kinesitherapie.models.user;
+import com.kinesitherapie.kinesitherapie.repostry.userrepositry;
 
 
 @Service

@@ -6,13 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface reportsry_fiche extends JpaRepository<FicheMedicale, Integer> {
-
-    @Query("""
-        SELECT FicheMedicale
-        FROM FicheMedicale  
-        WHERE FicheMedicale.patient.id = :id
-""")
-public FicheMedicale findByDescritpion(String Descritpion);
 public FicheMedicale findByPatient(patient patient);
 
 

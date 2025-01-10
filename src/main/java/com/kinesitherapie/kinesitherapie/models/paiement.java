@@ -3,8 +3,12 @@ package com.kinesitherapie.kinesitherapie.models;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.*;
+import jakarta.persistence.Entity;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter

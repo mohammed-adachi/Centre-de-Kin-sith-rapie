@@ -18,7 +18,7 @@ public class rendez_vous {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private String Date ;
+    private String date ;
     @Column(nullable = false)
     private String heure;
     @Column(nullable = false)
