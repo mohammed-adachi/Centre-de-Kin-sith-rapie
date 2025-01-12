@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 public class patient {
     @Id  // Ajout de l'annotation @Id pour marquer ce champ comme clé primaire
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
-    private long id;
+    private Integer  id;
      @Column(unique = true)
     private String name;
     @Column(unique = true)
@@ -22,10 +22,10 @@ public class patient {
     @Column(unique = true)
     private String adress;
   // generer getters et setters
-    public long getId() {
+    public Integer getId() {
         return id;
     }
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public String getName() {
