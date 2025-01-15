@@ -1,12 +1,6 @@
 package com.kinesitherapie.kinesitherapie.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.*;
-import jakarta.persistence.Entity;
 import lombok.experimental.SuperBuilder;
 import jakarta.persistence.*;
 
@@ -19,9 +13,9 @@ import jakarta.persistence.*;
 public class FicheMedicale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     @Column(nullable = false)
-    private String Descritpion;
+    private String Description;
     @ManyToOne
     @JoinColumn(name = "patient_id", nullable = false)
     private patient patient; 
