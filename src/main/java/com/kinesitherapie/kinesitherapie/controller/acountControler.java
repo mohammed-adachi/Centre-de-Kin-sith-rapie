@@ -41,7 +41,9 @@ import com.kinesitherapie.kinesitherapie.models.registerDLO;
 import com.kinesitherapie.kinesitherapie.models.register_patien;
 import com.kinesitherapie.kinesitherapie.models.rendez_vous;
 import com.kinesitherapie.kinesitherapie.repostry.*;
+import com.kinesitherapie.kinesitherapie.models.FicheMedicale;
 import com.kinesitherapie.kinesitherapie.models.RendezVousPatientDTO;
+import com.kinesitherapie.kinesitherapie.models.ficher_medical_patient_Dto;
 import com.kinesitherapie.kinesitherapie.models.loginDLO;
 import com.kinesitherapie.kinesitherapie.models.patient;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
@@ -61,6 +63,8 @@ public class acountControler {
 
 @Autowired
 private patient_Repostry patient_Repostry;
+@Autowired
+private reportsry_fiche reportsry_fiche;
 
 @Autowired
 private AuthenticationManager authenticationManager;
@@ -267,7 +271,79 @@ public ResponseEntity<?> deleteRendezVous(@PathVariable Integer id) {
     }
 }
 
+@PostMapping("/create_ficher_medical")
+public ResponseEntity<?> createFicherMedical(@Valid @RequestBody ficher_medical_patient_Dto ficher_medical_patient_Dto) {
+    try {
+        // Recherche du patient
+        patient patient = patient_Repostry.findById(ficher_medical_patient_Dto.getPatient_id())
+            .orElseThrow(() -> new EntityNotFoundException("Patient with ID " + ficher_medical_patient_Dto.getPatient_id() + " not found"));
 
+        // Création du fichier médical
+        FicheMedicale ficherMedical = new FicheMedicale();
+        ficherMedical.setDescription(ficher_medical_patient_Dto.getDescription());
+        ficherMedical.setPatient(patient);
+
+        // Sauvegarde du fichier médical
+        FicheMedicale savedFicherMedical = reportsry_fiche.save(ficherMedical);
+
+        return ResponseEntity.ok(savedFicherMedical);
+    } catch (EntityNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    } catch (Exception e) {
+        e.printStackTrace(); // Log du problème
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating ficher medical: " + e.getMessage());
+    }
+}
+@GetMapping("/ficher_medical")
+public List<FicheMedicale> getFicherMedical() {
+    List<FicheMedicale> result = reportsry_fiche.findAll();
+    System.out.println("Ficher medical fetched: " + result.size());
+    return result;
+}
+@PutMapping("/update_ficher_medical/{id}")
+public ResponseEntity<?> updateFicherMedical(@PathVariable Integer id, @Valid @RequestBody ficher_medical_patient_Dto ficher_medical_patient_Dto) {
+    try {
+        // Recherche du fichier médical
+        FicheMedicale ficherMedical = reportsry_fiche.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Ficher medical with ID " + id + " not found"));
+
+        // Recherche du patient
+        patient patient = patient_Repostry.findById(ficher_medical_patient_Dto.getPatient_id())
+            .orElseThrow(() -> new EntityNotFoundException("Patient with ID " + ficher_medical_patient_Dto.getPatient_id() + " not found"));
+
+        // Mise à jour des informations
+        ficherMedical.setDescription(ficher_medical_patient_Dto.getDescription());
+        ficherMedical.setPatient(patient);
+
+        // Sauvegarde des modifications
+        FicheMedicale savedFicherMedical = reportsry_fiche.save(ficherMedical);
+
+        return ResponseEntity.ok(savedFicherMedical);
+    } catch (EntityNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    } catch (Exception e) {
+        e.printStackTrace(); // Log du problème
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating ficher medical: " + e.getMessage());
+    }
+}
+@DeleteMapping("/delete_ficher_medical/{id}")
+public ResponseEntity<?> deleteFicherMedical(@PathVariable Integer id) {
+    try {
+        // Recherche du fichier médical
+        FicheMedicale ficherMedical = reportsry_fiche.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Ficher medical with ID " + id + " not found"));
+
+        // Suppression du fichier médical
+        reportsry_fiche.delete(ficherMedical);
+
+        return ResponseEntity.ok("Ficher medical deleted");
+    } catch (EntityNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    } catch (Exception e) {
+        e.printStackTrace(); // Log du problème
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting ficher medical: " + e.getMessage());
+    }
+}
 
 // @PutMapping("/update_patient/{id}")
 // public ResponseEntity<Object> updatePatient(
