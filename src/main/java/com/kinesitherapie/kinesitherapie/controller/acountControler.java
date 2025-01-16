@@ -177,10 +177,7 @@ private rendez_reporstry rendez_reporstry;
      return encoder.encode(parms).getTokenValue();  
     }
 
-@GetMapping("/patient")
-    public List<patient> getPatient(){
-      return patient_Repostry.findAll();
-}
+
 
 
 @PostMapping("/register-patient")
@@ -344,7 +341,77 @@ public ResponseEntity<?> deleteFicherMedical(@PathVariable Integer id) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting ficher medical: " + e.getMessage());
     }
 }
+@PostMapping("/register_patient")
+public ResponseEntity<Object> registerPatient(
+        @Valid @RequestBody register_patien registerPatientDTO,
+        BindingResult result) {
+    // Vérification des erreurs de validation
+    if (result.hasErrors()) {
+        var errorMap = result.getFieldErrors().stream()
+                .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+        return ResponseEntity.badRequest().body(errorMap);
+    }
 
+    // Création du patient
+    patient patient = new patient();
+    patient.setName(registerPatientDTO.getName());
+    patient.setDateOfBirth(registerPatientDTO.getDateOfBirth());
+    patient.setTelephone(registerPatientDTO.getTelephone());
+    patient.setAdress(registerPatientDTO.getAdress());
+
+    // Sauvegarde dans la base de données
+    patient_Repostry.save(patient);
+
+    return ResponseEntity.ok(patient);
+}
+
+@GetMapping("/patient")
+public List<patient> getPatients() {
+    return patient_Repostry.findAll();
+}
+@PutMapping("/update_patient/{id}")
+public ResponseEntity<Object> updatePatient(
+        @PathVariable Integer id,
+        @Valid @RequestBody register_patien registerPatientDTO,
+        BindingResult result) {
+    // Vérification des erreurs de validation
+    if (result.hasErrors()) {
+        var errorMap = result.getFieldErrors().stream()
+                .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+        return ResponseEntity.badRequest().body(errorMap);
+    }
+
+    // Vérification si le patient existe
+    Optional<patient> existingPatient = patient_Repostry.findById(id);
+    if (existingPatient.isEmpty()) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Patient not found");
+    }
+
+    // Mise à jour des informations
+    patient patient = existingPatient.get();
+    patient.setName(registerPatientDTO.getName());
+    patient.setDateOfBirth(registerPatientDTO.getDateOfBirth());
+    patient.setTelephone(registerPatientDTO.getTelephone());
+    patient.setAdress(registerPatientDTO.getAdress());
+
+    // Sauvegarde dans la base de données
+    patient_Repostry.save(patient);
+
+    return ResponseEntity.ok(patient);
+}
+@DeleteMapping("/delete_patient/{id}")
+public ResponseEntity<Object> deletePatient(@PathVariable Integer id) {
+    // Vérification si le patient existe
+    Optional<patient> existingPatient = patient_Repostry.findById(id);
+    if (existingPatient.isEmpty()) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Patient not found");
+    }
+
+    // Suppression du patient
+    patient_Repostry.delete(existingPatient.get());
+
+    return ResponseEntity.ok("Patient deleted");
+}
 // @PutMapping("/update_patient/{id}")
 // public ResponseEntity<Object> updatePatient(
 //         @PathVariable Integer id,
