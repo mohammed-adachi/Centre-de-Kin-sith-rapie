@@ -33,7 +33,7 @@ public class patient {
     private String telephone;
     @Column(name="adress")
     private String adress;
-    @Column(name = "date_of_birth")
+    @Column(name = "dateOfBirth")
     private LocalDate dateOfBirth;
     
     @ManyToMany(mappedBy = "patients")
