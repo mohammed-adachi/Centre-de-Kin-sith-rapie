@@ -39,6 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kinesitherapie.kinesitherapie.models.user;
 import com.kinesitherapie.kinesitherapie.models.registerDLO;
 import com.kinesitherapie.kinesitherapie.models.register_patien;
+import com.kinesitherapie.kinesitherapie.models.register_prestation_DTO;
 import com.kinesitherapie.kinesitherapie.models.rendez_vous;
 import com.kinesitherapie.kinesitherapie.repostry.*;
 import com.kinesitherapie.kinesitherapie.models.FicheMedicale;
@@ -46,6 +47,7 @@ import com.kinesitherapie.kinesitherapie.models.RendezVousPatientDTO;
 import com.kinesitherapie.kinesitherapie.models.ficher_medical_patient_Dto;
 import com.kinesitherapie.kinesitherapie.models.loginDLO;
 import com.kinesitherapie.kinesitherapie.models.patient;
+import com.kinesitherapie.kinesitherapie.models.prestation;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -70,6 +72,8 @@ private reportsry_fiche reportsry_fiche;
 private AuthenticationManager authenticationManager;
 @Autowired  
 private rendez_reporstry rendez_reporstry;
+@Autowired
+private repostry_prestations repostry_prestations;
 
   @PostMapping("/register")
   public ResponseEntity<Object> register(@ Valid @RequestBody registerDLO registerDLO ,BindingResult result){
@@ -412,48 +416,69 @@ public ResponseEntity<Object> deletePatient(@PathVariable Integer id) {
 
     return ResponseEntity.ok("Patient deleted");
 }
-// @PutMapping("/update_patient/{id}")
-// public ResponseEntity<Object> updatePatient(
-//         @PathVariable Integer id,
-//         @Valid @RequestBody register_patien registerPatientDTO,
-//         BindingResult result) {
-//     // Vérification des erreurs de validation
-//     if (result.hasErrors()) {
-//         var errorMap = result.getFieldErrors().stream()
-//                 .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
-//         return ResponseEntity.badRequest().body(errorMap);
-//     }
 
-//     // Vérification si le patient existe
-//     Optional<patient> existingPatient = patient_Repostry.findById(id);
-//     if (existingPatient.isEmpty()) {
-//         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Patient not found");
-//     }
+@PostMapping("/register_presation")
+public ResponseEntity<Object> registerPrestation(@Valid @RequestBody register_prestation_DTO register_prestation_DTO,
+        BindingResult result) {
+    // Vérification des erreurs de validation
+    if (result.hasErrors()) {
+        var errorMap = result.getFieldErrors().stream()
+                .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+        return ResponseEntity.badRequest().body(errorMap);
+    }
 
-//     // Mise à jour des informations
-//     patient patient = existingPatient.get();
-//     patient.setName(registerPatientDTO.getName());
-//     patient.setPrenom(registerPatientDTO.getPrenom());
-//     patient.setTelephone(registerPatientDTO.getTelephone());
-//     patient.setAdress(registerPatientDTO.getAdress());
+    // Création de la prestation
+    prestation prestation = new prestation();
+    prestation.setName(register_prestation_DTO.getName());
+    prestation.setType(register_prestation_DTO.getType());
+    prestation.setTarif(register_prestation_DTO.getTarif());
 
-//     // Sauvegarde dans la base de données
-//     patient_Repostry.save(patient);
+    // Sauvegarde dans la base de données
+    repostry_prestations.save(prestation);
 
-//     return ResponseEntity.ok(patient);
-// }
+    return ResponseEntity.ok(prestation);
+}
+@GetMapping("/prestations")
+public List<prestation> getPrestations() {
+    return repostry_prestations.findAll();
+}
+@PutMapping("/update_prestation/{id}")
+public ResponseEntity<Object> updatePrestation(
+        @PathVariable Integer id,
+        @Valid @RequestBody register_prestation_DTO registerPrestationDTO,
+        BindingResult result) {
+    // Vérification des erreurs de validation
+    if (result.hasErrors()) {
+        var errorMap = result.getFieldErrors().stream()
+                .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+        return ResponseEntity.badRequest().body(errorMap);
+    }
 
-// // genrer deletere by id
-// @DeleteMapping("/delete_patient/{id}")
-// public ResponseEntity<Object> deletePatient(@PathVariable Integer id) {
-//     // Vérification si le patient existe
-//     Optional<patient> existingPatient = patient_Repostry.findById(id);
-//     if (existingPatient.isEmpty()) {
-//         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Patient not found");
-//     }  
-//     return null;
+    // Vérification si la prestation existe
+    Optional<prestation> existingPrestation = repostry_prestations.findById(id);
+    if
+    (existingPrestation.isEmpty()) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Prestation not found");
+    }
 
+    // Mise à jour des informations
+    prestation prestation = existingPrestation.get();
+    prestation.setName(registerPrestationDTO.getName());
+    prestation.setType(registerPrestationDTO.getType());
+    prestation.setTarif(registerPrestationDTO.getTarif());
+    repostry_prestations.save(prestation);
+    return ResponseEntity.ok(prestation);   
+       }
+@DeleteMapping("/delete_prestation/{id}")
+public ResponseEntity<Object> deletePrestation(@PathVariable Integer id) {
+    // Vérification si la prestation existe
+    Optional<prestation> existingPrestation = repostry_prestations.findById(id);
+    if
+    (existingPrestation.isEmpty()) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Prestation not found");
+    }
+        return null;
 
-    
-// }
+}
+
 }
