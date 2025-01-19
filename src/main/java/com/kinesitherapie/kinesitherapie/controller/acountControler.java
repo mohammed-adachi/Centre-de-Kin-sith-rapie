@@ -41,6 +41,8 @@ import com.kinesitherapie.kinesitherapie.models.registerDLO;
 import com.kinesitherapie.kinesitherapie.models.register_patien;
 import com.kinesitherapie.kinesitherapie.models.register_prestation_DTO;
 import com.kinesitherapie.kinesitherapie.models.rendez_vous;
+import com.kinesitherapie.kinesitherapie.models.salle;
+import com.kinesitherapie.kinesitherapie.models.salle_Dto;
 import com.kinesitherapie.kinesitherapie.repostry.*;
 import com.kinesitherapie.kinesitherapie.models.FicheMedicale;
 import com.kinesitherapie.kinesitherapie.models.RendezVousPatientDTO;
@@ -74,6 +76,8 @@ private AuthenticationManager authenticationManager;
 private rendez_reporstry rendez_reporstry;
 @Autowired
 private repostry_prestations repostry_prestations;
+@Autowired
+private salle_reporstry salle_Repostry;
 
   @PostMapping("/register")
   public ResponseEntity<Object> register(@ Valid @RequestBody registerDLO registerDLO ,BindingResult result){
@@ -480,5 +484,65 @@ public ResponseEntity<Object> deletePrestation(@PathVariable Integer id) {
         return null;
 
 }
+@PostMapping("/register_salle")
+public ResponseEntity<Object> registerSalle(@Valid @RequestBody salle_Dto salleDto, BindingResult result) {
+    // Vérification des erreurs de validation
+    if (result.hasErrors()) {
+        var errorMap = result.getFieldErrors().stream()
+                .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+        return ResponseEntity.badRequest().body(errorMap);
+    }
 
+    // Création de la salle
+    salle salle = new salle();
+    salle.setName(salleDto.getName());
+    salle.setnombre_machines(salleDto.getNombre_machines());
+    salle.setnombre_lits(salleDto.getNombre_lits());
+
+    // Sauvegarde dans la base de données
+    salle_Repostry.save(salle);
+
+    return ResponseEntity.ok(salle);
+
+}
+
+@GetMapping("/salles")
+public List<salle> getSalles() {
+    return salle_Repostry.findAll();}
+@PutMapping("/update_salle/{id}")
+public ResponseEntity<Object> updateSalle(
+        @PathVariable Integer id,
+        @Valid @RequestBody salle_Dto salleDto,
+        BindingResult result) {
+    // Vérification des erreurs de validation
+    if (result.hasErrors()) {
+        var errorMap = result.getFieldErrors().stream()
+                .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+        return ResponseEntity.badRequest().body(errorMap);
+    }
+
+    // Vérification si la salle existe
+    Optional<salle> existingSalle = salle_Repostry.findById(id);
+    if (existingSalle.isEmpty()) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Salle not found");
+    }
+    // Mise à jour des informations
+    salle salle = existingSalle.get();
+    salle.setName(salleDto.getName());
+    salle.setnombre_machines(salleDto.getNombre_machines());
+    salle.setnombre_lits(salleDto.getNombre_lits());
+    // Sauvegarde dans la base de données
+    salle_Repostry.save(salle);
+    return ResponseEntity.ok(salle);}
+@DeleteMapping("/delete_salle/{id}")
+public ResponseEntity<Object> deleteSalle(@PathVariable Integer id) {
+    // Vérification si la salle existe
+    Optional<salle> existingSalle = salle_Repostry.findById(id);
+    if (existingSalle.isEmpty()) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Salle not found");
+    }
+    // Suppression de la salle
+    salle_Repostry.delete(existingSalle.get());
+    return ResponseEntity.ok("Salle deleted");
+}
 }
