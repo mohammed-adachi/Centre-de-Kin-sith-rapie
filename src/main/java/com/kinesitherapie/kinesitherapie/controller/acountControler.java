@@ -48,7 +48,9 @@ import com.kinesitherapie.kinesitherapie.models.FicheMedicale;
 import com.kinesitherapie.kinesitherapie.models.RendezVousPatientDTO;
 import com.kinesitherapie.kinesitherapie.models.ficher_medical_patient_Dto;
 import com.kinesitherapie.kinesitherapie.models.loginDLO;
+import com.kinesitherapie.kinesitherapie.models.paiement;
 import com.kinesitherapie.kinesitherapie.models.patient;
+import com.kinesitherapie.kinesitherapie.models.patient_DTO;
 import com.kinesitherapie.kinesitherapie.models.prestation;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 
@@ -78,6 +80,8 @@ private rendez_reporstry rendez_reporstry;
 private repostry_prestations repostry_prestations;
 @Autowired
 private salle_reporstry salle_Repostry;
+@Autowired
+private repostry_paiement repostry_paiement;
 
   @PostMapping("/register")
   public ResponseEntity<Object> register(@ Valid @RequestBody registerDLO registerDLO ,BindingResult result){
@@ -545,4 +549,72 @@ public ResponseEntity<Object> deleteSalle(@PathVariable Integer id) {
     salle_Repostry.delete(existingSalle.get());
     return ResponseEntity.ok("Salle deleted");
 }
+@PostMapping("/register_paiement")
+public ResponseEntity<Object> registerPaiement(@Valid @RequestBody patient_DTO paiementDTO,
+        BindingResult result) {
+            try {
+                System.out.println("Fetching patient with ID: " + paiementDTO.getPatient_id());
+                
+                 patient patient = patient_Repostry.findById(paiementDTO.getPatient_id())
+                     .orElseThrow(() -> new RuntimeException("Patient with ID " + paiementDTO.getPatient_id() + " not found"));
+
+    // Création de la prestation
+    paiement paiement = new paiement ();
+    paiement.setDate(paiementDTO.getDate());
+    paiement.setMontant(paiementDTO.getMontant());
+    paiement.setPatient(patient);
+
+    // Sauvegarde dans la base de données
+    repostry_paiement.save(paiement);
+
+    return ResponseEntity.ok(paiement);
+} catch (Exception e) {
+    e.printStackTrace(); // Log the stack trace
+    return ResponseEntity.badRequest().body("Error creating paiement: " + e.getMessage());
+}
+
+
+}
+@GetMapping("/paiements")
+public List<paiement> getPaiements() {
+    return repostry_paiement.findAll();
+}
+@PutMapping("/update_paiement/{id}")
+public ResponseEntity<Object> updatePaiement(
+        @PathVariable Integer id,
+        @Valid @RequestBody patient_DTO paiementDTO,
+        BindingResult result) {
+    // Vérification des erreurs de validation
+    if (result.hasErrors()) {
+        var errorMap = result.getFieldErrors().stream()
+                .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+        return ResponseEntity.badRequest().body(errorMap);
+    }
+
+    // Vérification si le paiement existe
+    Optional<paiement> existingPaiement = repostry_paiement.findById(id);
+    if (existingPaiement.isEmpty()) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paiement not found");
+    }
+
+    // Mise à jour des informations
+    paiement paiement = existingPaiement.get();
+    paiement.setDate(paiementDTO.getDate());
+    paiement.setMontant(paiementDTO.getMontant());
+    // Sauvegarde dans la base de données
+    repostry_paiement.save(paiement);
+    return ResponseEntity.ok(paiement);
+        }
+@DeleteMapping("/delete_paiement/{id}")
+public ResponseEntity<Object> deletePaiement(@PathVariable Integer id) {
+    // Vérification si le paiement existe
+    Optional<paiement> existingPaiement = repostry_paiement.findById(id);
+    if (existingPaiement.isEmpty()) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paiement not found");
+    }
+    // Suppression du paiement
+    repostry_paiement.delete(existingPaiement.get());
+    return ResponseEntity.ok("Paiement deleted");
+}
+
 }
