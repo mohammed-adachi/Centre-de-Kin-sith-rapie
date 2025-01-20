@@ -35,7 +35,7 @@ public class salle {
     public void setnombre_machines(int nombre_machines ) {
         this.nombre_machines  = nombre_machines ;
     }
-    
+
     public int getnombre_machines () {
         return nombre_machines ;
     }

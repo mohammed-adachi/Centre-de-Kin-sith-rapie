@@ -1,5 +1,7 @@
 package com.kinesitherapie.kinesitherapie.models;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,13 +21,12 @@ import lombok.experimental.SuperBuilder;
 public class paiement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     @Column(nullable = false)
     private double montant ;
     @Column(nullable = false)
-    private String date;
+    private LocalDate date;
     @ManyToOne
     @JoinColumn(name = "patient_id", nullable = false)
     private patient patient;
-
 }
