@@ -10,8 +10,6 @@ import com.kinesitherapie.kinesitherapie.models.rendez_vous;
 public interface rendez_reporstry extends JpaRepository<rendez_vous, Integer> {
 
 
-    public rendez_vous findByDate(String Date);
-    public rendez_vous findByHeure(String heure);
-    public rendez_vous findByStatut(String statut);
+ 
 
 }
