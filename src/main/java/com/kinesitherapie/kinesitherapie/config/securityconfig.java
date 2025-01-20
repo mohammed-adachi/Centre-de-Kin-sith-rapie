@@ -59,6 +59,10 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
                         .requestMatchers("/acount/salles").permitAll()
                         .requestMatchers("/acount/update_salle/**").permitAll()
                         .requestMatchers("/acount/delete_salle/**").permitAll()
+                        .requestMatchers("/acount/register_paiement").permitAll()
+                        .requestMatchers("/acount/paiements").permitAll()
+                        .requestMatchers("/acount/update_paiement/**").permitAll()
+                        .requestMatchers("/acount/delete_paiement/**").permitAll()
                         .anyRequest().authenticated() 
                 )
                                           
