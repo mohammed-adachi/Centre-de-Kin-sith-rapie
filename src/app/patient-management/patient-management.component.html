@@ -1,0 +1,59 @@
+<div class="container">
+  <h1>Gestion des Patients</h1>
+
+  <!-- Formulaire -->
+  <form class="form">
+    <input
+      type="text"
+      placeholder="name"
+      name="name"
+      required
+    />
+    <input
+      type="text"
+      placeholder="adress"
+      name="adress"
+      required
+    />
+    <input
+      type="text"
+      placeholder="telephone"
+      name="telephone"
+      required
+    />
+    <button type="submit">ajouter</button>
+    <button type="button">Réinitialiser</button>
+  </form>
+
+  <!-- Recherche -->
+  <input
+    type="text"
+    placeholder="Rechercher un patient..."
+    class="search"
+  />
+
+  <!-- Tableau -->
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Téléphone</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let patient of Patient">
+        <td>{{ patient.id }}</td>
+        <td>{{ patient.name }}</td>
+        <td>{{ patient.adress }}</td>
+        <td>{{ patient.telephone }}</td>
+        <td>
+          <!-- <button (click)="editPatient(patient)">Modifier</button> -->
+          <!-- <button (click)="deletePatient(patient.id)">Supprimer</button> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

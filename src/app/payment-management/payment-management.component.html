@@ -1,0 +1,65 @@
+<!-- Formulaire pour ajouter un paiement -->
+<div>
+    <h2>Ajouter un paiement</h2>
+    <form (ngSubmit)="addPayment()">
+      <label for="amount">Montant:</label>
+      <input type="number" id="amount" [(ngModel)]="newPayment.amount" name="amount" required />
+  
+      <label for="method">Méthode de paiement:</label>
+      <input type="text" id="method" [(ngModel)]="newPayment.method" name="method" required />
+  
+      <button type="submit">Ajouter</button>
+    </form>
+  </div>
+  
+  <!-- Affichage des paiements -->
+<!-- Affichage des paiements -->
+<div>
+    <h2>Historique des paiements</h2>
+    <ul>
+      <li *ngFor="let payment of payments">
+        {{ payment.id }} - {{ payment.amount }}€ - {{ payment.method }} - {{ payment.status }}
+        <button (click)="editPayment(payment)">Modifier</button>
+        <button (click)="deletePayment(payment.id)">Supprimer</button>
+  
+        <!-- Ajouter une transaction pour un paiement -->
+        <form (ngSubmit)="addTransaction(payment.id)">
+          <label for="description">Description:</label>
+          <input type="text" [(ngModel)]="newTransaction.description" name="description" required />
+          <button type="submit">Ajouter Transaction</button>
+        </form>
+        
+        <!-- Affichage des transactions associées -->
+        <ul>
+          <li *ngFor="let transaction of getTransactionsForPayment(payment.id)">
+            {{ transaction.transactionDate | date }} - {{ transaction.description }} - {{ transaction.status }}
+            <button (click)="deleteTransaction(transaction.id)">Supprimer</button>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  
+<!-- Affichage des paiements -->
+<ul>
+    <li *ngFor="let payment of payments">
+      <!-- Afficher les informations sur le paiement -->
+      <p>{{ payment.date | date }} - {{ payment.method }} - {{ payment.amount }} € - {{ payment.status }}</p>
+  
+      <!-- Ajouter une transaction pour un paiement -->
+      <form (ngSubmit)="addTransaction(payment.id)">
+        <label for="description">Description:</label>
+        <input type="text" [(ngModel)]="newTransaction.description" name="description" required />
+        <button type="submit">Ajouter Transaction</button>
+      </form>
+  
+      <!-- Affichage des transactions associées -->
+      <ul>
+        <li *ngFor="let transaction of getTransactionsForPayment(payment.id)">
+          {{ transaction.transactionDate | date }} - {{ transaction.description }} - {{ transaction.status }}
+          <button (click)="deleteTransaction(transaction.id)">Supprimer</button>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  

@@ -1,0 +1,25 @@
+<div>
+    <h2>Gestion des Rendez-vous</h2>
+  
+    <!-- Search bar to filter appointments -->
+    <input [(ngModel)]="searchTerm" (input)="filterAppointments()" placeholder="Search by patient name, date, or time">
+  
+    <!-- Appointment form for adding and editing -->
+    <form (ngSubmit)="isEditing ? updateAppointment() : addAppointment()">
+      <input [(ngModel)]="appointmentModel.patientName" name="patientName" placeholder="Patient Name">
+      <input [(ngModel)]="appointmentModel.date" name="date" type="date" placeholder="Date">
+      <input [(ngModel)]="appointmentModel.time" name="time" type="time" placeholder="Time">
+      <button type="submit">{{ isEditing ? 'Update' : 'Add' }} Appointment</button>
+      <button type="button" (click)="resetForm()">Reset</button>
+    </form>
+  
+    <!-- List of appointments -->
+    <ul>
+      <li *ngFor="let appointment of filterAppointments()">
+        {{ appointment.patientName }} - {{ appointment.date }} at {{ appointment.time }}
+        <button (click)="editAppointment(appointment)">Edit</button>
+        <button (click)="deleteAppointment(appointment.id)">Delete</button>
+      </li>
+    </ul>
+  </div>
+  

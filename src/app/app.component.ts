@@ -1,11 +1,19 @@
 import { Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-root',
+  standalone : false,
   templateUrl: './app.component.html',
-  standalone: false,
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'my-angular-app';
+showBox: any;
+hideBox() {
+  this.showBox = false;
 }
+  title = 'centre';
+}
+

@@ -1,0 +1,14 @@
+.resource-management {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  input {
+    margin: 5px;
+    padding: 5px;
+  }
+  
+  button {
+    margin-left: 10px;
+  }
+  

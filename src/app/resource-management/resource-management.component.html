@@ -1,0 +1,59 @@
+<div class="resource-management">
+    <h2>Gestion des ressources</h2>
+  
+    <!-- Formulaire pour ajouter/modifier une salle -->
+    <div>
+      <h3>Ajouter une salle</h3>
+      <input [(ngModel)]="newRoom.name" placeholder="Nom de la salle" />
+      <input [(ngModel)]="newRoom.capacity" placeholder="Capacité" type="number" />
+      <button (click)="addRoom()">Ajouter Salle</button>
+    </div>
+  
+    <!-- Formulaire pour ajouter/modifier une machine -->
+    <div>
+      <h3>Ajouter une machine</h3>
+      <input [(ngModel)]="newMachine.name" placeholder="Nom de la machine" />
+      <input [(ngModel)]="newMachine.type" placeholder="Type de machine" />
+      <button (click)="addMachine()">Ajouter Machine</button>
+    </div>
+  
+    <!-- Formulaire pour ajouter/modifier un forfait -->
+    <div>
+      <h3>Ajouter un forfait</h3>
+      <input [(ngModel)]="newPackage.name" placeholder="Nom du forfait" />
+      <input [(ngModel)]="newPackage.price" placeholder="Prix" type="number" />
+      <input [(ngModel)]="newPackage.duration" placeholder="Durée" />
+      <button (click)="addPackage()">Ajouter Forfait</button>
+    </div>
+  
+    <!-- Liste des salles -->
+    <h3>Salles</h3>
+    <ul>
+      <li *ngFor="let room of rooms">
+        {{ room.name }} ({{ room.capacity }} personnes)
+        <button (click)="deleteRoom(room.id)">Supprimer</button>
+        <button (click)="editRoom(room)">Modifier</button>
+      </li>
+    </ul>
+  
+    <!-- Liste des machines -->
+    <h3>Machines</h3>
+    <ul>
+      <li *ngFor="let machine of machines">
+        {{ machine.name }} ({{ machine.type }})
+        <button (click)="deleteMachine(machine.id)">Supprimer</button>
+        <button (click)="editMachine(machine)">Modifier</button>
+      </li>
+    </ul>
+  
+    <!-- Liste des forfaits -->
+    <h3>Forfaits</h3>
+    <ul>
+      <li *ngFor="let pkg of packages">
+        {{ pkg.name }} ({{ pkg.price }} EUR) - {{ pkg.duration }}
+        <button (click)="deletePackage(pkg.id)">Supprimer</button>
+        <button (click)="editPackage(pkg)">Modifier</button>
+      </li>
+    </ul>
+  </div>
+  

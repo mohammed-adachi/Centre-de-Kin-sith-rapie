@@ -1,0 +1,73 @@
+<div class="user-container">
+  <h1>User Management</h1>
+
+  <!-- Form for adding a new user -->
+  <form (ngSubmit)="createUser()">
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input
+        id="firstName"
+        type="text"
+        [(ngModel)]="newUser.firstName"
+        name="firstName"
+        required
+        class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <input
+        id="lastName"
+        type="text"
+        [(ngModel)]="newUser.lastName"
+        name="lastName"
+        required
+        class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input
+        id="email"
+        type="email"
+        [(ngModel)]="newUser.email"
+        name="email"
+        required
+        class="form-control"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Add User</button>
+  </form>
+
+  <hr />
+
+  <!-- User list -->
+  <h2>Users</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+          <button
+            (click)="deleteUser(user.id)"
+            class="btn btn-danger btn-sm"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
