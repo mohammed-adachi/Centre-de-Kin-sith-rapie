@@ -1,0 +1,41 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+.my-angular-app/package-lock.json
+.my-angular-app/node_modules/
+.my-angular-app/dist/
+.my-angular-app/e2e/node_modules/
+.my-angular-app/e2e/dist/
+.my-angular-app/e2e/src/app.e2e-spec.ts
+.my-angular-app/e2e/src/app.po.ts
+.my-angular-app/e2e/tsconfig.json
