@@ -1,0 +1,19 @@
+<h2>Liste des Patients</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Adresse</th>
+      <th>Téléphone</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr  *ngFor = "let patients of patients">
+      <td>{{ patients.name }}</td>
+      <td>{{ patients.adress}}</td>
+      <td>{{ patients.telephone }}</td>
+
+    </tr>
+  </tbody>
+</table>
