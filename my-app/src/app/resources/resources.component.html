@@ -1,1 +1,20 @@
-<p>resources works!</p>
+
+<h2>Liste des Patients</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Adresse</th>
+      <th>Téléphone</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr  *ngFor = "let salle of salle">
+      <td>{{ salle.name }}</td>
+      <td>{{ salle.nombre_machines}}</td>
+      <td>{{ salle.nombre_lits }}</td>
+
+    </tr>
+  </tbody>
+</table>

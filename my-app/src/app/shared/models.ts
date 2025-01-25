@@ -15,34 +15,53 @@ export class Patient {
 // appointment.model.ts
 export class Appointment {
   id!: number;
-  patientId!: number;
-  date!: Date;
-  heure!: string;
-  statut!: string;;
+  patient !: Patient;
+  date!: string;
+  time!: string;
+  location!: string;;
 constructor() {
   this.id = 0;
-  this.patientId = 0;
-   this.date = new Date();
-   this.heure = "";
-   this.statut = "";
+  this.patient = new Patient();
+   this.date = "";
+   this.time = "";
+   this.location = "";
 }
 }
 
 // resource.model.ts
-export interface Resource {
-  id: number;
-  type: 'salle' | 'machine' | 'forfait';
-  nom: string;
-  description: string;
-  nombreMachines?: number; // Pour les salles
-  nombreLits?: number;     // Pour les salles
-  tarif?: number;          // Pour les forfaits
-}
+export class Salle {
+  id!: number;
+  name!: string;
+  nombre_machines!: number;
+ // Pour les salles
+  nombre_lits!: number;     // Pour les salles         // Pour les forfaits
+constructor() {
+  this.id = 0;
+  this.nombre_machines = 0;
+this.name = "";
+   this.nombre_lits = 0;
+
+}}
 
 // payment.model.ts
-export interface Payment {
-  id: number;
-  patientId: number;
-  montant: number;
-  date: Date;
+export class Payment {
+  id!: number;
+  patient !: Patient;
+  montant!: number;
+  date!: Date;
+  constructor() {
+    this.id = 0;
+    this.patient = new Patient();
+    this.montant = 0;
+    this.date = new Date();
+}}
+export class fiche_medical{
+id!:number;
+patient!:Patient;
+description!:string;
+constructor(){
+  this.id=0;
+  this.patient=new Patient();
+  this.description="";}
+
 }

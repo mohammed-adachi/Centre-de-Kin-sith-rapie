@@ -1,1 +1,21 @@
-<p>appointments works!</p>
+
+<h2>Liste des rendez vous </h2>
+<table>
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Adresse</th>
+      <th>Téléphone</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr  *ngFor = "let rendez_vous of rendez_vous">
+      <td>{{ rendez_vous.date }}</td>
+      <td>{{ rendez_vous.patient.name}}</td>
+      <td>{{ rendez_vous.time }}</td>
+      <td>{{ rendez_vous.location }}</td>
+
+    </tr>
+  </tbody>
+</table>

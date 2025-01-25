@@ -1,1 +1,19 @@
-<p>payments works!</p>
+<h2>Liste des Patients</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Adresse</th>
+      <th>Téléphone</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr  *ngFor = "let paiment of paiment">
+      <td>{{ paiment.montant}}</td>
+      <td>{{ paiment.date}}</td>
+      <td>{{ paiment.patient.name }}</td>
+
+    </tr>
+  </tbody>
+</table>
