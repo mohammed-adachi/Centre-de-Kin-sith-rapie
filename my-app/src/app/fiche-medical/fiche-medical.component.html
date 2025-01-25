@@ -1,0 +1,20 @@
+<p>fiche-medical works!</p>
+
+<h2>Liste des rendez vous </h2>
+<table>
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Adresse</th>
+      <th>Téléphone</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr  *ngFor = "let fiche_medical of fiche_medical">
+      <td>{{ fiche_medical.patient.name}}</td>
+      <td>{{ fiche_medical.description }}</td>
+
+    </tr>
+  </tbody>
+</table>

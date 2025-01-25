@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Patient,Appointment, Salle, Payment } from './shared/models';
+import { Patient,Appointment, Salle, Payment, fiche_medical, prestation } from './shared/models';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,12 @@ export class ServiceCompletService {
   }
   paiment(): Observable<Payment[]>{   
     return this.http.get<Payment[]>(`${this.baseURL}/paiements`);
+  }
+  getFiche(): Observable<fiche_medical[]>{  
+    return this.http.get<fiche_medical[]>(`${this.baseURL}/ficher_medical`);
+  }
+  prestations(): Observable<prestation[]>{
+    return this.http.get<prestation[]>(`${this.baseURL}/prestations`);
   }
   // getEmployeeById(id: number): Observable<Patient>{
   //   return this.http.get<Patient>(`${this.baseURL}/get/${id}`);

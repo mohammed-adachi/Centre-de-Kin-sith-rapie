@@ -65,3 +65,17 @@ constructor(){
   this.description="";}
 
 }
+export class prestation{
+ id!:number;
+  name!:string;
+  tarif!:number;
+  type!:string;
+  constructor(){
+    this.id=0;
+    this.name="";
+    this.tarif=0;
+    this.type="";
+  }
+
+
+}

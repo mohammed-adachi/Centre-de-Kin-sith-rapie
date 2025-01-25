@@ -1,0 +1,20 @@
+<p>prestation works!</p>
+<h2>Liste des Patients</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Adresse</th>
+      <th>Téléphone</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr  *ngFor = "let prestation of prestation">
+      <td>{{ prestation.name }}</td>
+      <td>{{ prestation.tarif}}</td>
+      <td>{{ prestation.type }}</td>
+
+    </tr>
+  </tbody>
+</table>
