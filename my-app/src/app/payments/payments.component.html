@@ -13,7 +13,12 @@
       <td>{{ paiment.montant}}</td>
       <td>{{ paiment.date}}</td>
       <td>{{ paiment.patient.name }}</td>
+      <td>
+        <button (click) = "updatePayment(paiment.patient.id)" > Update</button>
+        <button (click)="deletePayment(paiment.patient.id)"   > Delete</button>
 
+    </td>
     </tr>
   </tbody>
 </table>
+<button (click)="registerPayement()"   > submit</button>

@@ -1,0 +1,58 @@
+<p>update-payments works!</p>
+<div class="container my-5">
+  <h2 class="mb-4">Mise à jour d'un paiement</h2>
+
+  <form [formGroup]="updatePaymentForm" (ngSubmit)="submitForm()">
+    <!-- Patient ID Field -->
+    <div class="form-group mb-3">
+      <label for="patient_id">ID du patient</label>
+      <input
+        type="number"
+        formControlName="patient_id"
+        id="patient_id"
+        class="form-control"
+        placeholder="Entrez l'ID du patient"
+      />
+      <div class="text-danger">
+        L'ID du patient est requis.
+      </div>
+    </div>
+
+    <!-- Payment Amount Field -->
+    <div class="form-group mb-3">
+      <label for="amount">Montant</label>
+      <input
+        type="number"
+        formControlName="montant"
+        id="montant"
+        class="form-control"
+        placeholder="Entrez le montant"
+      />
+      <div class="text-danger">
+        Le montant est requis.
+      </div>
+    </div>
+
+    <!-- Payment Date Field -->
+    <div class="form-group mb-3">
+      <label for="payment_date">Date</label>
+      <input
+        type="date"
+        formControlName="date"
+        id="date"
+        class="form-control"
+      />
+      <div class="text-danger">
+        La date est requise.
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button
+      type="submit"
+      class="btn btn-primary"
+    >
+      Mettre à jour le paiement
+    </button>
+  </form>
+</div>

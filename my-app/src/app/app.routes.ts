@@ -10,6 +10,8 @@ import { FicheMedicalComponent } from './fiche-medical/fiche-medical.component';
 import { PrestationComponent } from './prestation/prestation.component';
 import {RegisterPatientsComponent}from './patients/register-patients/register-patients.component';
 import { UpdatePatientsComponent } from './patients/update-patients/update-patients.component';
+import { RegisterPaymentComponent } from './payments/register-payment/register-payment.component';
+import { UpdatePaymentComponent } from './payments/update-payment/update-payment.component';
 
 
 export const routes: Routes = [
@@ -24,5 +26,7 @@ export const routes: Routes = [
   {path :"prestation", component : PrestationComponent},
   {path:"updatePatient/:id", component: UpdatePatientsComponent},
   {path:"patient-form", component: RegisterPatientsComponent},
+  {path:"register-payement", component: RegisterPaymentComponent},
+  { path: "updatePayment/:id", component: UpdatePaymentComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
