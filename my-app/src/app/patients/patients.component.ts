@@ -48,5 +48,26 @@ console.log(this.employeeService.getPatients());
 
   }
 
+  deletePatient(id: number){
+
+    if(confirm("Are you sure to delete patient ID: "+id)){
+    this.employeeService.deletePatient(id).subscribe( data => {
+      alert("Le patient a été supprimé avec succès.");
+      this.getPatient();
+      this.router.navigate(['/login']).then(success => {
+        if (!success) {
+          console.error("Navigation vers /login a échoué.");
+        }
+      });
+
+    })}
+  }
+  registerPatient() {
+    this.router.navigate(['/patient-form']);
+  }
+  updatePatient(id: number){
+    this.router.navigate(['updatePatient', id]);
+  }
+
 
 }

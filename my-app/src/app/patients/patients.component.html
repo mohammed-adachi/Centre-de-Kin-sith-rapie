@@ -13,7 +13,13 @@
       <td>{{ patients.name }}</td>
       <td>{{ patients.adress}}</td>
       <td>{{ patients.telephone }}</td>
+      <td>
+        <button (click) = "updatePatient(patients.id)" > Update</button>
+        <button (click)="deletePatient(patients.id)"   > Delete</button>
 
+    </td>
     </tr>
   </tbody>
+
 </table>
+<button (click)="registerPatient()"   > submit</button>

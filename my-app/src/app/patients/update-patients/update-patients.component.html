@@ -1,0 +1,74 @@
+<p>update-patients works!</p>
+<p>register-patients works!</p>
+<div class="container my-5">
+  <h2 class="mb-4">Un patient</h2>
+
+  <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+    <!-- Name Field -->
+    <div class="form-group mb-3">
+      <label for="name">Nom</label>
+      <input
+        type="text"
+        formControlName="name"
+        id="name"
+        class="form-control"
+      />
+      <div class="text-danger">
+        Le nom est requis.
+      </div>
+    </div>
+
+    <!-- Date of Birth Field -->
+    <div class="form-group mb-3">
+      <label for="date_of_birth">Date de naissance</label>
+      <input
+        type="date"
+        formControlName="date_of_birth"
+        id="date_of_birth"
+        class="form-control"
+      />
+      <div class="text-danger">
+        La date de naissance est requise.
+      </div>
+    </div>
+
+    <!-- Address Field -->
+    <div class="form-group mb-3">
+      <label for="adress">Adresse</label>
+      <input
+        type="text"
+        formControlName="adress"
+        id="adress"
+        class="form-control"
+      />
+      <div class="text-danger">
+        L'adresse est requise.
+      </div>
+    </div>
+
+    <!-- Phone Field -->
+    <div class="form-group mb-3">
+      <label for="telephone">Téléphone</label>
+      <input
+        type="tel"
+        formControlName="telephone"
+        id="telephone"
+        class="form-control"
+      />
+      <div class="text-danger">
+        Le numéro de téléphone est requis.
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="registerForm.invalid"
+    >
+      submit
+    </button>
+  </form>
+</div>
+
+
