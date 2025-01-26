@@ -72,4 +72,19 @@ export class ServiceCompletService {
   deletePatient(id: number): Observable<Object>{
     return this.http.delete(`${this.baseURL}/delete_patient/${id}`);
   }
+
+
+  register_payments(signRequest: any,httpOptions:any): Observable<any> {
+
+    console.log(signRequest)
+    return this.http.post(`${this.baseURL}/register_paiement`, signRequest,httpOptions);
+  }
+  updatePayment(id: number, signRequest: any): Observable<any>{
+    console.log(signRequest);
+    return this.http.put(`${this.baseURLS}/update_paiement/${id}`,signRequest);
+  }
+
+  deletePayment(id: number): Observable<Object>{
+    return this.http.delete(`${this.baseURL}/delete_paiement/${id}`);
+  }
 }
