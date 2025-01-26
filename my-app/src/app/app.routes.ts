@@ -8,8 +8,8 @@ import { ResourcesComponent } from './resources/resources.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { FicheMedicalComponent } from './fiche-medical/fiche-medical.component';
 import { PrestationComponent } from './prestation/prestation.component';
-
-
+import {RegisterPatientsComponent}from './patients/register-patients/register-patients.component';
+import { UpdatePatientsComponent } from './patients/update-patients/update-patients.component';
 
 
 export const routes: Routes = [
@@ -22,5 +22,7 @@ export const routes: Routes = [
   {path :"payment", component : PaymentsComponent},
   {path :"fiche", component : FicheMedicalComponent},
   {path :"prestation", component : PrestationComponent},
+  {path:"updatePatient/:id", component: UpdatePatientsComponent},
+  {path:"patient-form", component: RegisterPatientsComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];

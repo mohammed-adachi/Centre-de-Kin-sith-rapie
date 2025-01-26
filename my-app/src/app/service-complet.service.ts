@@ -24,10 +24,10 @@ export class ServiceCompletService {
   salles(): Observable<Salle[]>{
     return this.http.get<Salle[]>(`${this.baseURL}/salles`);
   }
-  paiment(): Observable<Payment[]>{   
+  paiment(): Observable<Payment[]>{
     return this.http.get<Payment[]>(`${this.baseURL}/paiements`);
   }
-  getFiche(): Observable<fiche_medical[]>{  
+  getFiche(): Observable<fiche_medical[]>{
     return this.http.get<fiche_medical[]>(`${this.baseURL}/ficher_medical`);
   }
   prestations(): Observable<prestation[]>{
@@ -41,15 +41,20 @@ export class ServiceCompletService {
   //   console.log(signRequest)
   //   return this.http.post("http://localhost:8082/acount", signRequest,httpOptions);
   // }
-  registers(signRequest: any): Observable<any> {
-    console.log(signRequest)
-    return this.http.post("http://localhost:8082/acount/register_patient", signRequest);
-  }
-  updateEmployee(id: number, signRequest: any,httpOptions:any): Observable<any>{
+  // register_patients(signRequest: any): Observable<any> {
+  //   console.log(signRequest)
+  //   return this.http.post("http://localhost:8082/acount/register_patient", signRequest);
+  // }
+  register_patients(signRequest: any,httpOptions:any): Observable<any> {
+
+      console.log(signRequest)
+      return this.http.post(`${this.baseURL}/register_patient`, signRequest,httpOptions);
+    }
+    updatePatients(id: number, signRequest: any,httpOptions:any): Observable<any>{
     console.log(signRequest);
     return this.http.put(`${this.baseURLS}/update_patient/${id}`,signRequest,httpOptions);
   }
-  updateEmploye(id: number, signRequest: any): Observable<any>{
+  updatePatient(id: number, signRequest: any): Observable<any>{
     console.log(signRequest);
 
     // Convertir en JSON (facultatif) mais s'assurer que le Content-Type est correct
@@ -61,10 +66,10 @@ export class ServiceCompletService {
         'Content-Type': 'application/json'
       }
     };
-    return this.http.put(`${this.baseURL}/updatee/${id}`,data,httpOptions);
+    return this.http.put(`${this.baseURL}/update_patient/${id}`,data,httpOptions);
   }
 
-  deleteEmployee(id: number): Observable<Object>{
+  deletePatient(id: number): Observable<Object>{
     return this.http.delete(`${this.baseURL}/delete_patient/${id}`);
   }
 }
