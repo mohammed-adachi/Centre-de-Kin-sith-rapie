@@ -1,0 +1,60 @@
+<p>register-prestation works!</p>
+<div class="container my-5">
+  <h2 class="mb-4">Un prestation</h2>
+
+  <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+    <!-- Name Field -->
+    <div class="form-group mb-3">
+      <label for="name">Nom</label>
+      <input
+        type="text"
+        formControlName="name"
+        id="name"
+        class="form-control"
+      />
+      <div class="text-danger">
+        Le nom est requis.
+      </div>
+    </div>
+
+    <!-- Date of Birth Field -->
+    <div class="form-group mb-3">
+      <label for="type">Date de naissance</label>
+      <input
+        type="text"
+        formControlName="type"
+        id="type"
+        class="form-control"
+      />
+      <div class="text-danger">
+        Type
+      </div>
+    </div>
+
+    <!-- Address Field -->
+    <div class="form-group mb-3">
+      <label for="tarif">tarif</label>
+      <input
+        type="number"
+        formControlName="tarif"
+        id="tarif"
+        class="form-control"
+      />
+      <div class="text-danger">
+        tarif est requise.
+      </div>
+    </div>
+
+    <!-- Phone Field -->
+
+
+    <!-- Submit Button -->
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="registerForm.invalid"
+    >
+      submit
+    </button>
+  </form>
+</div>

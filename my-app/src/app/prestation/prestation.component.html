@@ -14,7 +14,13 @@
       <td>{{ prestation.name }}</td>
       <td>{{ prestation.tarif}}</td>
       <td>{{ prestation.type }}</td>
+      <td>
+        <button (click) = "updatePrestation(prestation.id)" > Update</button>
+        <button (click)="deletePrestation(prestation.id)"   > Delete</button>
 
+    </td>
     </tr>
   </tbody>
+
 </table>
+<button (click)="registerPrestation()"   > submit</button>
