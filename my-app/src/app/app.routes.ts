@@ -16,6 +16,8 @@ import { RegisterPrestationComponent } from './prestation/register-prestation/re
 import { UpdatePrestationComponent } from './prestation/update-prestation/update-prestation.component';
 import { RegisterRessourcesComponent } from './resources/register-ressources/register-ressources.component';
 import { UpdateRessourcesComponent } from './resources/update-ressources/update-ressources.component';
+import { UpdateFicheMedicalComponent } from './fiche-medical/update-fiche-medical/update-fiche-medical.component';
+import { RegisterFicheMedicalComponent } from './fiche-medical/register-fiche-medical/register-fiche-medical.component';
 
 
 export const routes: Routes = [
@@ -36,5 +38,7 @@ export const routes: Routes = [
   {path:"update_prestation/:id", component: UpdatePrestationComponent},
   {path: 'register_Ressource', component: RegisterRessourcesComponent},
   {path: 'update-Ressource/:id', component: UpdateRessourcesComponent},
+  {path: 'register_fichemedical', component: RegisterFicheMedicalComponent},
+  {path: 'update_fichemedical/:id', component: UpdateFicheMedicalComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];

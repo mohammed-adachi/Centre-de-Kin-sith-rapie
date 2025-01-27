@@ -14,7 +14,13 @@
     <tr  *ngFor = "let fiche_medical of fiche_medical">
       <td>{{ fiche_medical.patient.name}}</td>
       <td>{{ fiche_medical.description }}</td>
+      <td>
+        <button (click) = "update_fichemedical(fiche_medical.patient.id)" > Update</button>
+        <button (click)="delete_fichemedical(fiche_medical.patient.id)"   > Delete</button>
 
+    </td>
     </tr>
   </tbody>
 </table>
+<button (click)="register_fichemedical()"   > submit</button>
+

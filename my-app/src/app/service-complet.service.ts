@@ -110,5 +110,16 @@ export class ServiceCompletService {
   deleteRessource(id: number): Observable<Object>{
     return this.http.delete(`${this.baseURL}/delete_salle/${id}`);
   }
+  register_fiche_medical(signRequest: any,httpOptions:any): Observable<any> {
+    console.log(signRequest)
+    return this.http.post(`${this.baseURL}/create_ficher_medical`, signRequest,httpOptions);
+  }
+  updateFiche(id: number, signRequest: any): Observable<any>{
+    console.log(signRequest);
+    return this.http.put(`${this.baseURLS}/update_ficher_medical/${id}`,signRequest);
+  }
+  delete_fichemedical(id: number): Observable<Object>{
+    return this.http.delete(`${this.baseURL}/delete_ficher_medical/${id}`);
+  }
 
 }
