@@ -12,6 +12,8 @@ import {RegisterPatientsComponent}from './patients/register-patients/register-pa
 import { UpdatePatientsComponent } from './patients/update-patients/update-patients.component';
 import { RegisterPaymentComponent } from './payments/register-payment/register-payment.component';
 import { UpdatePaymentComponent } from './payments/update-payment/update-payment.component';
+import { RegisterPrestationComponent } from './prestation/register-prestation/register-prestation.component';
+import { UpdatePrestationComponent } from './prestation/update-prestation/update-prestation.component';
 
 
 export const routes: Routes = [
@@ -28,5 +30,7 @@ export const routes: Routes = [
   {path:"patient-form", component: RegisterPatientsComponent},
   {path:"register-payement", component: RegisterPaymentComponent},
   { path: "updatePayment/:id", component: UpdatePaymentComponent },
+  {path:"register_prestation", component: RegisterPrestationComponent},
+  {path:"update_prestation/:id", component: UpdatePrestationComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
