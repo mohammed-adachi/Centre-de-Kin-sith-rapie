@@ -14,6 +14,8 @@ import { RegisterPaymentComponent } from './payments/register-payment/register-p
 import { UpdatePaymentComponent } from './payments/update-payment/update-payment.component';
 import { RegisterPrestationComponent } from './prestation/register-prestation/register-prestation.component';
 import { UpdatePrestationComponent } from './prestation/update-prestation/update-prestation.component';
+import { RegisterRessourcesComponent } from './resources/register-ressources/register-ressources.component';
+import { UpdateRessourcesComponent } from './resources/update-ressources/update-ressources.component';
 
 
 export const routes: Routes = [
@@ -32,5 +34,7 @@ export const routes: Routes = [
   { path: "updatePayment/:id", component: UpdatePaymentComponent },
   {path:"register_prestation", component: RegisterPrestationComponent},
   {path:"update_prestation/:id", component: UpdatePrestationComponent},
+  {path: 'register_Ressource', component: RegisterRessourcesComponent},
+  {path: 'update-Ressource/:id', component: UpdateRessourcesComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];

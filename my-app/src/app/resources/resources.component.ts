@@ -47,6 +47,24 @@ export class ResourcesComponent implements OnInit {
     console.log(this.employeeService.rendez_vous());
 
       }
+      registerResource(){
+        this.router.navigate(['register_Ressource']);
+      }
+      updateResource(id: number){
+        this.router.navigate(['update-Ressource',id]);
+      }
+      deleteRessource(id: number){if(confirm("Are you sure to delete patient ID: "+id)){
+        this.employeeService.deleteRessource(id).subscribe( data => {
+          alert("Le patient a été supprimé avec succès.");
+          this.router.navigate(['/login']).then(success => {
+            if (!success) {
+              console.error("Navigation vers /login a échoué.");
+            }
+          });
+
+        })}
+
+}}
 
 
-}
+

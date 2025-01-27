@@ -14,7 +14,13 @@
       <td>{{ salle.name }}</td>
       <td>{{ salle.nombre_machines}}</td>
       <td>{{ salle.nombre_lits }}</td>
+      <td>
+        <button (click) = "updateResource(salle.id)" > Update</button>
+        <button (click)="deleteRessource(salle.id)"   > Delete</button>
 
+    </td>
     </tr>
   </tbody>
+
 </table>
+<button (click)="registerResource()"   > submit</button>

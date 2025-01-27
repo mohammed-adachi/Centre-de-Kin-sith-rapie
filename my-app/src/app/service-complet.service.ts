@@ -99,4 +99,16 @@ export class ServiceCompletService {
   deletePrestation(id: number): Observable<Object>{
     return this.http.delete(`${this.baseURL}/delete_presation/${id}`);
   }
+  register_ressource(signRequest: any,httpOptions:any): Observable<any> {
+    console.log(signRequest)
+    return this.http.post(`${this.baseURL}/register_salle`, signRequest,httpOptions);
+  }
+  updateResource (id: number, signRequest: any): Observable<any>{
+    console.log(signRequest);
+    return this.http.put(`${this.baseURLS}/update_salle/${id}`,signRequest);
+  }
+  deleteRessource(id: number): Observable<Object>{
+    return this.http.delete(`${this.baseURL}/delete_salle/${id}`);
+  }
+
 }
