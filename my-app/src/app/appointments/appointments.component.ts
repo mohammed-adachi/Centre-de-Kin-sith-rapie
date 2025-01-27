@@ -47,7 +47,23 @@ export class AppointmentsComponent implements OnInit {
   console.log(this.employeeService.rendez_vous());
 
     }
+    register_apponit() {
+      this.router.navigate(['/register_apponit']);
+    }
+    update_apponit(id: number){
+      this.router.navigate(['/update_apponit', id]);
+    }
+    delete_apponit(id: number){
+      if(confirm("Are you sure to delete patient ID: "+id)){
+      this.employeeService.delete_appoint(id).subscribe( data => {
+        alert("Le patient a été supprimé avec succès.");
+        this.router.navigate(['/login']).then(success => {
+          if (!success) {
+            console.error("Navigation vers /login a échoué.");
+          }
+        });
 
-
+      })}
+    }
 
 }

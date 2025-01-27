@@ -15,7 +15,12 @@
       <td>{{ rendez_vous.patient.name}}</td>
       <td>{{ rendez_vous.time }}</td>
       <td>{{ rendez_vous.location }}</td>
+      <td>
+        <button (click) = "update_apponit(rendez_vous.id)" > Update</button>
+        <button (click)="delete_apponit(rendez_vous.id)"   > Delete</button>
 
+    </td>
     </tr>
   </tbody>
 </table>
+<button (click)="register_apponit()"   > submit</button>

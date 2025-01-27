@@ -14,8 +14,8 @@
       <td>{{ paiment.date}}</td>
       <td>{{ paiment.patient.name }}</td>
       <td>
-        <button (click) = "updatePayment(paiment.patient.id)" > Update</button>
-        <button (click)="deletePayment(paiment.patient.id)"   > Delete</button>
+        <button (click) = "updatePayment(paiment.id)" > Update</button>
+        <button (click)="deletePayment(paiment.id)"   > Delete</button>
 
     </td>
     </tr>
