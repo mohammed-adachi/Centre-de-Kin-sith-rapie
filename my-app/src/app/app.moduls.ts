@@ -11,13 +11,13 @@ import { AuthInterceptor } from './auth.interceptor';
 import { _AuthComponent  } from './auth.auhtService';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/login/login.component';
+import { authGuard } from './auth.guard';
 
 
 @NgModule({
 
   declarations: [
     AppComponent,
-    HttpClientModule,
     RegisterComponent,
     _AuthComponent,
     LoginComponent,
@@ -32,6 +32,7 @@ import { LoginComponent } from './components/login/login.component';
     NgIf
   ],
   providers: [
+     authGuard,
     JwtService,{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]

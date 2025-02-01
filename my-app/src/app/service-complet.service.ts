@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Patient,Appointment, Salle, Payment, fiche_medical, prestation } from './shared/models';
+import { JwtService } from './service/jwt.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,10 @@ export class ServiceCompletService {
   private baseURL = "http://localhost:8082/acount";
   private baseURLS = "http://localhost:8082/acount";
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+    private userAuthService: JwtService,
+    private router: HttpClient
+  ) {
   }
 
   getPatients(): Observable<Patient[]>{
@@ -121,5 +125,36 @@ export class ServiceCompletService {
   delete_fichemedical(id: number): Observable<Object>{
     return this.http.delete(`${this.baseURL}/delete_ficher_medical/${id}`);
   }
+  register_rendezvous(signRequest: any,httpOptions:any): Observable<any> {
+    console.log(signRequest)
+    return this.http.post(`${this.baseURL}/create_rendezvous`, signRequest,httpOptions);
+  }
+  updateRendezvous(id: number, signRequest: any): Observable<any>{
+    console.log(signRequest);
+    return this.http.put(`${this.baseURLS}/update_rendez_vous/${id}`,signRequest);
+  }
+  delete_appoint(id: number): Observable<Object>{
+    return this.http.delete(`${this.baseURL}/delete_rendez_vous/${id}`);
+  }
 
+
+  public roleMatch(allowedRoles: string | any[]): boolean {
+    let isMatch = false;
+    const userRoles: any = this.userAuthService.getRoles();
+
+    if (userRoles != null && userRoles) {
+      for (let i = 0; i < userRoles.length; i++) {
+        for (let j = 0; j < allowedRoles.length; j++) {
+          if (userRoles[i].roleName === allowedRoles[j]) {
+            isMatch = true;
+            return isMatch;
+          } else {
+            return isMatch;
+          }
+        }
+      }
+    }
+    return isMatch;
+
+}
 }

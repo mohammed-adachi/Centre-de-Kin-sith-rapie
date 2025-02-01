@@ -1,51 +1,64 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
-const BASE_URL = 'http://localhost:8082/account/';
-const apiUrl = 'http://localhost:8082/home';
-export interface RegisterResponse {
-
-}
 @Injectable({
   providedIn: 'root'
 })
 export class JwtService {
+  private isAuthenticated = false;
 
+  constructor(private http: HttpClient) {}
 
-
-  constructor(private http: HttpClient) {
-
-
+  register(signRequest: any, httpOptions: any): Observable<any> {
+    console.log(signRequest);
+    return this.http.post("http://localhost:8082/acount/register", signRequest, httpOptions);
   }
 
-  register(signRequest: any,httpOptions:any): Observable<any> {
-    console.log(signRequest)
-    return this.http.post("http://localhost:8082/acount/register", signRequest,httpOptions);
-  }
-  login(signRequest: any,httpOptions:any): Observable<any> {
-    console.log(signRequest)
-    return this.http.post("http://localhost:8082/acount/login", signRequest,httpOptions);
+  login(signRequest: any, httpOptions: any): Observable<any> {
+    console.log(signRequest);
+    return this.http.post("http://localhost:8082/acount/login", signRequest, httpOptions);
   }
 
   private handleError(error: any) {
     console.error('Erreur détectée :', error);
     return throwError(error);
   }
-  // getHomeData(): Observable<any> {
-  //   return this.http.get('http://localhost:8082/acount/home');
-  // }
 
   saveToken(token: string): void {
-    localStorage.setItem('token', token);
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      localStorage.setItem('token', token);
+    }
   }
+
   getToken(): string | null {
-    return localStorage.getItem('token');
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      return localStorage.getItem('token');
+    }
+    return null;
   }
+
+  public clear(): void {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      localStorage.clear();
+    }
   }
 
+  public isLoggedIn(): boolean {
+    return this.getToken() !== null;
+  }
 
+  public setRoles(roles: any[]): void {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      localStorage.setItem('roles', JSON.stringify(roles));
+    }
+  }
 
-
-
-
+  public getRoles(): any[] {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      const roles = localStorage.getItem('roles');
+      return roles ? JSON.parse(roles) : [];
+    }
+    return [];
+  }
+}

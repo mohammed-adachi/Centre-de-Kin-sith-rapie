@@ -18,27 +18,34 @@ import { RegisterRessourcesComponent } from './resources/register-ressources/reg
 import { UpdateRessourcesComponent } from './resources/update-ressources/update-ressources.component';
 import { UpdateFicheMedicalComponent } from './fiche-medical/update-fiche-medical/update-fiche-medical.component';
 import { RegisterFicheMedicalComponent } from './fiche-medical/register-fiche-medical/register-fiche-medical.component';
+import { RegisterAppointComponent } from './appointments/register-appoint/register-appoint.component';
+import { UpdateAppointComponent } from './appointments/update-appoint/update-appoint.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { HeaderComponent } from './header/header.component';
+import { authGuard } from './auth.guard';
 
 
 export const routes: Routes = [
   { path: "register", component: RegisterComponent },
-  { path: "login", component: LoginComponent },
-  {path:"dashbord", component: _AuthComponent  },
-  {path:"patient", component:  PatientsComponent    },
-  {path:"rendez_vous", component:  AppointmentsComponent    },
-  {path:"salles", component:  ResourcesComponent    },
-  {path :"payment", component : PaymentsComponent},
-  {path :"fiche", component : FicheMedicalComponent},
-  {path :"prestation", component : PrestationComponent},
-  {path:"updatePatient/:id", component: UpdatePatientsComponent},
-  {path:"patient-form", component: RegisterPatientsComponent},
-  {path:"register-payement", component: RegisterPaymentComponent},
-  { path: "updatePayment/:id", component: UpdatePaymentComponent },
-  {path:"register_prestation", component: RegisterPrestationComponent},
-  {path:"update_prestation/:id", component: UpdatePrestationComponent},
-  {path: 'register_Ressource', component: RegisterRessourcesComponent},
-  {path: 'update-Ressource/:id', component: UpdateRessourcesComponent},
-  {path: 'register_fichemedical', component: RegisterFicheMedicalComponent},
-  {path: 'update_fichemedical/:id', component: UpdateFicheMedicalComponent},
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
+  { path: "login", component: LoginComponent  , pathMatch: 'full'},
+  {path:"dashbord", component: HeaderComponent ,canActivate: [authGuard] },
+  {path:"patient", component:  PatientsComponent ,canActivate: [authGuard]   },
+  {path:"rendez_vous", component:  AppointmentsComponent ,   canActivate:[authGuard]    },
+  {path:"salles", component:  ResourcesComponent  ,canActivate: [authGuard]  },
+  {path :"payment", component : PaymentsComponent ,canActivate: [authGuard]},
+  {path :"fiche", component : FicheMedicalComponent ,canActivate: [authGuard]  },
+  {path :"prestation", component : PrestationComponent ,canActivate: [authGuard]},
+  {path:"updatePatient/:id", component: UpdatePatientsComponent ,canActivate: [authGuard]},
+  {path:"patient-form", component: RegisterPatientsComponent ,canActivate: [authGuard]},
+  {path:"register-payement", component: RegisterPaymentComponent ,canActivate: [authGuard]},
+  { path: "updatePayment/:id", component: UpdatePaymentComponent ,canActivate: [authGuard]},
+  {path:"register_prestation", component: RegisterPrestationComponent ,canActivate: [authGuard]},
+  {path:"update_prestation/:id", component: UpdatePrestationComponent ,canActivate: [authGuard]},
+  {path: 'register_Ressource', component: RegisterRessourcesComponent ,canActivate: [authGuard]},
+  {path: 'update-Ressource/:id', component: UpdateRessourcesComponent ,canActivate: [authGuard]},
+  {path: 'register_fichemedical', component: RegisterFicheMedicalComponent ,canActivate: [authGuard]},
+  {path: 'update_fichemedical/:id', component: UpdateFicheMedicalComponent ,canActivate: [authGuard]},
+  {path: 'register_apponit', component: RegisterAppointComponent ,canActivate: [authGuard]},
+  {path: 'update_apponit/:id', component: UpdateAppointComponent ,canActivate: [authGuard]},
+  { path: 'forbidden', component: ForbiddenComponent }
 ];

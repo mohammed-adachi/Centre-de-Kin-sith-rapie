@@ -46,11 +46,18 @@ export class LoginComponent implements OnInit {
       this.service.login(formValues, httpOptions).subscribe({
         next: (response) => {
 
-          if (response.token && response.user && response.user.username) {
+          if (response.token && response.user && response.user.username && response.user.role) {
             console.log(response);
             const jwtToken = response.token;
-            localStorage.setItem('authToken', jwtToken);
-            this.router.navigate(['/dashbord']);
+            localStorage.setItem('token', jwtToken);
+            if (response.user.role === 'DOCTOR') {
+              localStorage.setItem('isAdmin', 'true');
+              this.router.navigate(['/fiche']);
+            } else {
+              localStorage.setItem('isAdmin', 'false');
+              this.router.navigate(['/dashbord']);
+            }
+
           } else {
             // Si la réponse ne contient pas de nom d'utilisateur, afficher une erreur
             this.errorMessage = 'Nom d\'utilisateur ou mot de passe incorrect.';
