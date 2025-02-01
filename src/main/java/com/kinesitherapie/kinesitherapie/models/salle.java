@@ -13,11 +13,11 @@ public class salle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(unique = true)
+    @Column(nullable = false)
     private String name;
-    @Column(unique = true)
+    @Column(nullable = false)
     private int nombre_machines ;
-    @Column(unique = true)
+    @Column(nullable = false)
     private int nombre_lits;
     //genrer getters and setters
     public int getId() {
@@ -39,8 +39,8 @@ public class salle {
     public int getnombre_machines () {
         return nombre_machines ;
     }
-    public void setnombre_lits(int nombre_machines ) {
-        this.nombre_machines  = nombre_machines ;
+    public void setnombre_lits(int nombre_lits ) {
+        this.nombre_lits  = nombre_lits ;
     }
     public int getnombre_lits () {
         return nombre_lits ;

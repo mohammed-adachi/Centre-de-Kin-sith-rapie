@@ -1,12 +1,12 @@
 package com.kinesitherapie.kinesitherapie.models;
-import lombok.Getter;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@SuperBuilder
 @AllArgsConstructor
-@Builder
+@NoArgsConstructor
 public class salle_Dto {
     private  String name;
     private int nombre_machines;

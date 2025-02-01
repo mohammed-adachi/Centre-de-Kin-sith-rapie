@@ -1,12 +1,16 @@
 package com.kinesitherapie.kinesitherapie.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import java.util.List;
+import lombok.*;
 import jakarta.persistence.*;
+import static jakarta.persistence.FetchType.EAGER;
+import lombok.experimental.SuperBuilder;
 
-
+@Getter
+@Setter
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "users")
 public class user {
@@ -20,14 +24,12 @@ public class user {
     @Column(unique = true)
     private String email;
     private String password;
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+
     //getters and setters
-    public String getRole() {
-        return role;
-    }
-    public void setRole(String role) {
-        this.role = role;
-    }
+
     public String getUsername() {
         return username;
     }
@@ -52,6 +54,6 @@ public class user {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
 
 }

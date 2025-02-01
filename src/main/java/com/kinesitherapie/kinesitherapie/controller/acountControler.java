@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.method.P;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -65,7 +66,7 @@ public class acountControler {
   @Value("${security.jwt.issuer}")
     private String issuer;
  @Autowired
- private userrepositry userrepositry; 
+ private userrepositry userrepositry;
 
 @Autowired
 private patient_Repostry patient_Repostry;
@@ -74,7 +75,7 @@ private reportsry_fiche reportsry_fiche;
 
 @Autowired
 private AuthenticationManager authenticationManager;
-@Autowired  
+@Autowired
 private rendez_reporstry rendez_reporstry;
 @Autowired
 private repostry_prestations repostry_prestations;
@@ -85,8 +86,8 @@ private repostry_paiement repostry_paiement;
 
   @PostMapping("/register")
   public ResponseEntity<Object> register(@ Valid @RequestBody registerDLO registerDLO ,BindingResult result){
-    
-    
+
+
     if(result.hasErrors()){
       var  errorlist= result.getAllErrors();
       var errorMap= new HashMap<String,String>();
@@ -95,7 +96,7 @@ private repostry_paiement repostry_paiement;
       }
       return ResponseEntity.badRequest().body(errorMap);
     }
-    
+
    var bCryptPassword= new BCryptPasswordEncoder();
     var user= new user();
 
@@ -103,8 +104,8 @@ private repostry_paiement repostry_paiement;
     user.setFirstname(registerDLO.getFirstname());
     user.setPassword(bCryptPassword.encode(registerDLO.getPassword()));
     user.setEmail(registerDLO.getEmail());
-    user.setRole("ROLE_USER");
-   
+    user.setRole(registerDLO.getRole());
+
     try {
       var otheruser= userrepositry.findByUsername(registerDLO.getUsername());
       if(otheruser != null){
@@ -116,7 +117,7 @@ private repostry_paiement repostry_paiement;
         return ResponseEntity.badRequest().body("email already exist");
       }
       userrepositry.save(user);
-      
+
       var response= new HashMap<String,Object>();
       response.put("user",user);
       response.put("token",createJwtToken(user));
@@ -128,11 +129,11 @@ private repostry_paiement repostry_paiement;
     }
     return ResponseEntity.badRequest().body("error");
   }
-  
+
   @PostMapping("/login")
   public ResponseEntity<Object> login(@Valid @RequestBody loginDLO loginDLO ,BindingResult result){
-   
-    
+
+
     if(result.hasErrors()){
       var  errorlist= result.getAllErrors();
       var errorMap= new HashMap<String,String>();
@@ -150,28 +151,29 @@ private repostry_paiement repostry_paiement;
       var response= new HashMap<String,Object>();
       response.put("user",user);
       response.put("token",createJwtToken(user));
-      return ResponseEntity.ok(response); 
-    
+      response.put("roles", user.getRole());
+      return ResponseEntity.ok(response);
+
 
     }   catch (BadCredentialsException ex) {
         // Si les identifiants sont incorrects
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-        
+
     } catch (LockedException ex) {
         // Si le compte est verrouillé
         return ResponseEntity.status(HttpStatus.LOCKED).body("Account is locked");
-        
+
     } catch (DisabledException ex) {
         // Si le compte est désactivé
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Account is disabled");
-        
+
     } catch (AuthenticationException ex) {
         // Pour toute autre erreur d'authentification
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed");
     }
-    
+
   }
-  
+
 
 
     private String createJwtToken(user user){
@@ -182,11 +184,11 @@ private repostry_paiement repostry_paiement;
     .issuedAt(now)
     .claim("role", user.getRole())
     .subject(user.getUsername())
-    .expiresAt(now.plusSeconds(60))    
+    .expiresAt(now.plusSeconds(60))
     .build();
     var encoder= new NimbusJwtEncoder(new ImmutableSecret<>(secretKey.getBytes()));
     var parms= JwtEncoderParameters.from(JwsHeader.with(MacAlgorithm.HS256).build(),claims);
-     return encoder.encode(parms).getTokenValue();  
+     return encoder.encode(parms).getTokenValue();
     }
 
 
@@ -209,7 +211,7 @@ public ResponseEntity<?> createPatient(@Valid @RequestBody patient patient) {
 public ResponseEntity<?> createRendezVousPatient(@Valid @RequestBody RendezVousPatientDTO dto, @AuthenticationPrincipal UserDetails userDetails) {
     try {
         System.out.println("Fetching patient with ID: " + dto.getPatientId());
-        
+
          patient patient = patient_Repostry.findById(dto.getPatientId())
              .orElseThrow(() -> new RuntimeException("Patient with ID " + dto.getPatientId() + " not found"));
 
@@ -281,6 +283,7 @@ public ResponseEntity<?> deleteRendezVous(@PathVariable Integer id) {
 }
 
 @PostMapping("/create_ficher_medical")
+@PreAuthorize("hasAuthority('DOCTOR')")
 public ResponseEntity<?> createFicherMedical(@Valid @RequestBody ficher_medical_patient_Dto ficher_medical_patient_Dto) {
     try {
         // Recherche du patient
@@ -303,13 +306,23 @@ public ResponseEntity<?> createFicherMedical(@Valid @RequestBody ficher_medical_
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating ficher medical: " + e.getMessage());
     }
 }
+@GetMapping("/fiche")
+@PreAuthorize("hasAuthority('DOCTOR')")
+public String getFiche() {
+    return "acces coorecte";
+}
+
+
+
 @GetMapping("/ficher_medical")
+@PreAuthorize("hasAuthority('DOCTOR')")
 public List<FicheMedicale> getFicherMedical() {
     List<FicheMedicale> result = reportsry_fiche.findAll();
     System.out.println("Ficher medical fetched: " + result.size());
     return result;
 }
 @PutMapping("/update_ficher_medical/{id}")
+@PreAuthorize("hasAuthority('DOCTOR')")
 public ResponseEntity<?> updateFicherMedical(@PathVariable Integer id, @Valid @RequestBody ficher_medical_patient_Dto ficher_medical_patient_Dto) {
     try {
         // Recherche du fichier médical
@@ -336,6 +349,7 @@ public ResponseEntity<?> updateFicherMedical(@PathVariable Integer id, @Valid @R
     }
 }
 @DeleteMapping("/delete_ficher_medical/{id}")
+@PreAuthorize("hasAuthority('DOCTOR')")
 public ResponseEntity<?> deleteFicherMedical(@PathVariable Integer id) {
     try {
         // Recherche du fichier médical
@@ -475,9 +489,9 @@ public ResponseEntity<Object> updatePrestation(
     prestation.setType(registerPrestationDTO.getType());
     prestation.setTarif(registerPrestationDTO.getTarif());
     repostry_prestations.save(prestation);
-    return ResponseEntity.ok(prestation);   
+    return ResponseEntity.ok(prestation);
        }
-@DeleteMapping("/delete_prestation/{id}")
+@DeleteMapping("/delete_presation/{id}")
 public ResponseEntity<Object> deletePrestation(@PathVariable Integer id) {
     // Vérification si la prestation existe
     Optional<prestation> existingPrestation = repostry_prestations.findById(id);
@@ -485,7 +499,9 @@ public ResponseEntity<Object> deletePrestation(@PathVariable Integer id) {
     (existingPrestation.isEmpty()) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Prestation not found");
     }
-        return null;
+    // Suppression de la prestation
+    repostry_prestations.delete(existingPrestation.get());
+    return ResponseEntity.ok("Prestation deleted");
 
 }
 @PostMapping("/register_salle")
@@ -554,7 +570,7 @@ public ResponseEntity<Object> registerPaiement(@Valid @RequestBody patient_DTO p
         BindingResult result) {
             try {
                 System.out.println("Fetching patient with ID: " + paiementDTO.getPatient_id());
-                
+
                  patient patient = patient_Repostry.findById(paiementDTO.getPatient_id())
                      .orElseThrow(() -> new RuntimeException("Patient with ID " + paiementDTO.getPatient_id() + " not found"));
 

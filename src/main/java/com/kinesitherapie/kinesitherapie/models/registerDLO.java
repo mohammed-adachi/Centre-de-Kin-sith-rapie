@@ -9,14 +9,14 @@ public class registerDLO {
     private String password;
     @NotEmpty
     private String email;
-    private String role;
-    public String getRole() {
+    private Role role;
+    public Role getRole() {
         return role;
     }
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
-    
+
     public String getUsername() {
         return username;
     }
