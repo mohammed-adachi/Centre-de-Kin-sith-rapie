@@ -39,9 +39,9 @@ export class JwtService {
   }
 
   public clear(): void {
-    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-      localStorage.clear();
-    }
+    localStorage.removeItem('token');
+    localStorage.removeItem('roles');
+    localStorage.removeItem('isAdmin');
   }
 
   public isLoggedIn(): boolean {

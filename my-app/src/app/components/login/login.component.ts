@@ -49,8 +49,10 @@ export class LoginComponent implements OnInit {
           if (response.token && response.user && response.user.username && response.user.role) {
             console.log(response);
             const jwtToken = response.token;
+            const role =response.roles
             localStorage.setItem('token', jwtToken);
-            if (response.user.role === 'DOCTOR') {
+            localStorage.setItem('roles', role); // Convertir en tableau
+            if (response.roles === 'DOCTOR') {
               localStorage.setItem('isAdmin', 'true');
               this.router.navigate(['/fiche']);
             } else {

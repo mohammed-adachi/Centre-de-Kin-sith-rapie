@@ -32,7 +32,7 @@ export const routes: Routes = [
   {path:"patient", component:  PatientsComponent ,canActivate: [authGuard]   },
   {path:"rendez_vous", component:  AppointmentsComponent ,   canActivate:[authGuard]    },
   {path:"salles", component:  ResourcesComponent  ,canActivate: [authGuard]  },
-  {path :"payment", component : PaymentsComponent ,canActivate: [authGuard]},
+  {path :"payment", component : PaymentsComponent ,canActivate: [authGuard] },
   {path :"fiche", component : FicheMedicalComponent ,canActivate: [authGuard]  },
   {path :"prestation", component : PrestationComponent ,canActivate: [authGuard]},
   {path:"updatePatient/:id", component: UpdatePatientsComponent ,canActivate: [authGuard]},
