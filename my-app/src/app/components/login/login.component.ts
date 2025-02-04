@@ -12,7 +12,7 @@ import { HttpHeaders } from '@angular/common/http';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
-  imagePath: string = "../assets/images/prodigy_infotech_logo.jpg";
+  imagePath: string = "../assets/images/image.png";
   loginForm!: FormGroup;
   errorMessage: string = ''; // Pour afficher les messages d'erreur
 

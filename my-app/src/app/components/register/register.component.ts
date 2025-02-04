@@ -1,6 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { JwtService } from '../../service/jwt.service';
+import { Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-register',
@@ -15,7 +16,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private service: JwtService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) { }
   /*registers() {
     const userData = {
@@ -71,9 +73,10 @@ export class RegisterComponent implements OnInit {
     ).subscribe({
       next: (response) => {
         console.log(response); // Vérifie la réponse
-        if (response.username != null) {
-          alert("Hello " + response.username);
-        }
+
+          alert("Inscription réussie !");
+          this.router.navigate(['/login']);
+
       },
       error: (error) => {
         console.error("Erreur lors de l'enregistrement :", error);

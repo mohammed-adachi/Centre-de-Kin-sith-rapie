@@ -12,6 +12,10 @@ import { _AuthComponent  } from './auth.auhtService';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/login/login.component';
 import { authGuard } from './auth.guard';
+import { PublicLayoutComponent } from './public-layout/public-layout.component';
+import { PrivateLayoutComponent } from './private-layout/private-layout.component';
+import { RouterModule } from '@angular/router';
+
 
 
 @NgModule({
@@ -21,6 +25,8 @@ import { authGuard } from './auth.guard';
     RegisterComponent,
     _AuthComponent,
     LoginComponent,
+    PublicLayoutComponent,
+    PrivateLayoutComponent,
 
   ],
   imports: [
@@ -28,8 +34,9 @@ import { authGuard } from './auth.guard';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    CommonModule,
-    NgIf
+    BrowserModule,
+    RouterModule,
+
   ],
   providers: [
      authGuard,

@@ -1,6 +1,6 @@
+// routes.ts
 import { Routes } from '@angular/router';
 import { RegisterComponent } from './components/register/register.component';
-import { _AuthComponent  } from './auth.auhtService';
 import { LoginComponent } from './components/login/login.component';
 import { PatientsComponent } from './patients/patients.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
@@ -8,7 +8,7 @@ import { ResourcesComponent } from './resources/resources.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { FicheMedicalComponent } from './fiche-medical/fiche-medical.component';
 import { PrestationComponent } from './prestation/prestation.component';
-import {RegisterPatientsComponent}from './patients/register-patients/register-patients.component';
+import { RegisterPatientsComponent } from './patients/register-patients/register-patients.component';
 import { UpdatePatientsComponent } from './patients/update-patients/update-patients.component';
 import { RegisterPaymentComponent } from './payments/register-payment/register-payment.component';
 import { UpdatePaymentComponent } from './payments/update-payment/update-payment.component';
@@ -23,29 +23,49 @@ import { UpdateAppointComponent } from './appointments/update-appoint/update-app
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { HeaderComponent } from './header/header.component';
 import { authGuard } from './auth.guard';
-
+import { PublicLayoutComponent } from './public-layout/public-layout.component';
+import { PrivateLayoutComponent } from './private-layout/private-layout.component';
 
 export const routes: Routes = [
-  { path: "register", component: RegisterComponent },
-  { path: "login", component: LoginComponent  , pathMatch: 'full'},
-  {path:"dashbord", component: HeaderComponent ,canActivate: [authGuard] },
-  {path:"patient", component:  PatientsComponent ,canActivate: [authGuard]   },
-  {path:"rendez_vous", component:  AppointmentsComponent ,   canActivate:[authGuard]    },
-  {path:"salles", component:  ResourcesComponent  ,canActivate: [authGuard]  },
-  {path :"payment", component : PaymentsComponent ,canActivate: [authGuard] },
-  {path :"fiche", component : FicheMedicalComponent ,canActivate: [authGuard]  },
-  {path :"prestation", component : PrestationComponent ,canActivate: [authGuard]},
-  {path:"updatePatient/:id", component: UpdatePatientsComponent ,canActivate: [authGuard]},
-  {path:"patient-form", component: RegisterPatientsComponent ,canActivate: [authGuard]},
-  {path:"register-payement", component: RegisterPaymentComponent ,canActivate: [authGuard]},
-  { path: "updatePayment/:id", component: UpdatePaymentComponent ,canActivate: [authGuard]},
-  {path:"register_prestation", component: RegisterPrestationComponent ,canActivate: [authGuard]},
-  {path:"update_prestation/:id", component: UpdatePrestationComponent ,canActivate: [authGuard]},
-  {path: 'register_Ressource', component: RegisterRessourcesComponent ,canActivate: [authGuard]},
-  {path: 'update-Ressource/:id', component: UpdateRessourcesComponent ,canActivate: [authGuard]},
-  {path: 'register_fichemedical', component: RegisterFicheMedicalComponent ,canActivate: [authGuard]},
-  {path: 'update_fichemedical/:id', component: UpdateFicheMedicalComponent ,canActivate: [authGuard]},
-  {path: 'register_apponit', component: RegisterAppointComponent ,canActivate: [authGuard]},
-  {path: 'update_apponit/:id', component: UpdateAppointComponent ,canActivate: [authGuard]},
-  { path: 'forbidden', component: ForbiddenComponent }
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full',
+  },
+  {
+    path: '',
+    component: PublicLayoutComponent, // Layout public pour les pages publiques
+    children: [
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
+    ],
+  },
+  {
+    path: '',
+    component: PrivateLayoutComponent, // Layout privé pour les pages protégées
+    canActivate: [authGuard], // Appliquer le garde d'authentification
+    children: [
+      { path: 'dashbord', component: HeaderComponent },
+      { path: 'patient', component: PatientsComponent },
+      { path: 'rendez_vous', component: AppointmentsComponent },
+      { path: 'salles', component: ResourcesComponent },
+      { path: 'payment', component: PaymentsComponent },
+      { path: 'fiche', component: FicheMedicalComponent },
+      { path: 'prestation', component: PrestationComponent },
+      { path: 'updatePatient/:id', component: UpdatePatientsComponent },
+      { path: 'patient-form', component: RegisterPatientsComponent },
+      { path: 'register-payement', component: RegisterPaymentComponent },
+      { path: 'updatePayment/:id', component: UpdatePaymentComponent },
+      { path: 'register_prestation', component: RegisterPrestationComponent },
+      { path: 'update_prestation/:id', component: UpdatePrestationComponent },
+      { path: 'register_Ressource', component: RegisterRessourcesComponent },
+      { path: 'update-Ressource/:id', component: UpdateRessourcesComponent },
+      { path: 'register_fichemedical', component: RegisterFicheMedicalComponent },
+      { path: 'update_fichemedical/:id', component: UpdateFicheMedicalComponent },
+      { path: 'register_apponit', component: RegisterAppointComponent },
+      { path: 'update_apponit/:id', component: UpdateAppointComponent },
+      { path: 'forbidden', component: ForbiddenComponent },
+    ],
+  },
+  { path: '**', redirectTo: '/login' }, // Redirection pour les routes inconnues
 ];
