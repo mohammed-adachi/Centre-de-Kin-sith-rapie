@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtService } from './service/jwt.service';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthInterceptor } from './auth.interceptor';
@@ -36,6 +36,7 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     BrowserModule,
     RouterModule,
+    FormsModule,
 
   ],
   providers: [

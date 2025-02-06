@@ -25,6 +25,9 @@ import { HeaderComponent } from './header/header.component';
 import { authGuard } from './auth.guard';
 import { PublicLayoutComponent } from './public-layout/public-layout.component';
 import { PrivateLayoutComponent } from './private-layout/private-layout.component';
+import { RegisterFicheMedicalbyIdComponent } from './fiche-medical/register-fiche-medicalby-id/register-fiche-medicalby-id.component';
+import { FicheMedicalbyIdComponent } from './fiche-medical/fiche-medicalby-id/fiche-medicalby-id.component';
+import { UpdateFicheMedicalbyIdComponent } from './fiche-medical/update-fiche-medicalby-id/update-fiche-medicalby-id.component';
 
 export const routes: Routes = [
   {
@@ -45,12 +48,14 @@ export const routes: Routes = [
     component: PrivateLayoutComponent, // Layout privé pour les pages protégées
     canActivate: [authGuard], // Appliquer le garde d'authentification
     children: [
-      { path: 'dashbord', component: HeaderComponent },
+      { path: 'dashbord', component: HeaderComponent   },
       { path: 'patient', component: PatientsComponent },
-      { path: 'rendez_vous', component: AppointmentsComponent },
-      { path: 'salles', component: ResourcesComponent },
-      { path: 'payment', component: PaymentsComponent },
-      { path: 'fiche', component: FicheMedicalComponent },
+      { path: 'rendez_vous', component: AppointmentsComponent   },
+      { path: 'salles', component: ResourcesComponent  },
+      { path: 'payment', component: PaymentsComponent  },
+      { path: 'fiche', component: FicheMedicalComponent  },
+      {path:'viewficheMedical/:id',component:RegisterFicheMedicalbyIdComponent },
+      {path:'update_fichemedicalBY_ID/:id', component:UpdateFicheMedicalbyIdComponent},
       { path: 'prestation', component: PrestationComponent },
       { path: 'updatePatient/:id', component: UpdatePatientsComponent },
       { path: 'patient-form', component: RegisterPatientsComponent },
@@ -61,6 +66,7 @@ export const routes: Routes = [
       { path: 'register_Ressource', component: RegisterRessourcesComponent },
       { path: 'update-Ressource/:id', component: UpdateRessourcesComponent },
       { path: 'register_fichemedical', component: RegisterFicheMedicalComponent },
+      {path:'register_fichemedicalbyID/:id',component:FicheMedicalbyIdComponent },
       { path: 'update_fichemedical/:id', component: UpdateFicheMedicalComponent },
       { path: 'register_apponit', component: RegisterAppointComponent },
       { path: 'update_apponit/:id', component: UpdateAppointComponent },

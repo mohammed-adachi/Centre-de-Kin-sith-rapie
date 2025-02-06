@@ -1,21 +1,29 @@
 <!DOCTYPE html>
-<div class="min-h-screen bg-gray-50">
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medical App</title>
+  <!-- Lien vers Tailwind CSS (ajoutez-le dans votre projet) -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="min-h-screen bg-gray-50">
   <!-- Navbar -->
   <nav class="bg-indigo-700 shadow-lg">
-    <div class="max-w-7xl mx-auto px-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16">
         <!-- Logo et titre -->
         <div class="flex items-center">
           <div class="flex-shrink-0 flex items-center">
-            <img class="h-8 w-auto" [src]="imagePath" alt="Logo">
+            <img class="h-8 w-auto" [src]="imagePath" alt="Logo de l'application">
             <span class="ml-2 text-xl font-semibold text-white">Medical App</span>
           </div>
         </div>
 
         <!-- Boutons de navigation -->
         <div class="flex items-center space-x-4">
-          <!-- Notifications -->
-          <button class="p-2 rounded-full hover:bg-indigo-600 relative">
+          <!-- Bouton Notifications -->
+          <button class="p-2 rounded-full hover:bg-indigo-600 relative focus:outline-none focus:ring-2 focus:ring-white">
             <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
               3
             </span>
@@ -24,11 +32,15 @@
             </svg>
           </button>
 
-          <!-- Profile -->
+          <!-- Menu Profil -->
           <div class="relative">
-            <button class="flex items-center space-x-2 p-2 rounded-full hover:bg-indigo-600">
-              <img class="h-8 w-8 rounded-full" [src]="imagePath" alt="Profile">
+            <button class="flex items-center space-x-2 p-2 rounded-full hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-white">
+              <img class="h-8 w-8 rounded-full" [src]="imagePath" alt="Photo de profil">
               <span class="text-white">GB</span>
+            </button>
+            <!-- Bouton Déconnexion -->
+            <button (click)="logout()" class="absolute right-0 mt-2 w-32 bg-white text-gray-800 py-2 px-4 rounded-lg shadow-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              Déconnexion
             </button>
           </div>
         </div>
@@ -65,6 +77,12 @@
             </svg>
             <span>Fiche Médicale</span>
           </a>
+          <a routerLink="/rendez_vous" class="flex items-center px-4 py-3 text-gray-700 hover:bg-indigo-100 hover:text-indigo-700 rounded-lg transition-colors group">
+            <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <span>rendez vous </span>
+          </a>
 
           <!-- Notifications -->
           <a routerLink="/notifications" class="flex items-center px-4 py-3 text-gray-700 hover:bg-indigo-100 hover:text-indigo-700 rounded-lg transition-colors group">
@@ -87,4 +105,5 @@
       </div>
     </main>
   </div>
-</div>
+</body>
+</html>

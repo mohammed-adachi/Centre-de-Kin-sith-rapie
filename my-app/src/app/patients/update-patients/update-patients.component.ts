@@ -4,10 +4,11 @@ import { ServiceCompletService } from '../../service-complet.service';
 import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Patient } from '../../shared/models';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-update-patients',
   standalone: true,
- imports: [ReactiveFormsModule],
+ imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './update-patients.component.html',
 })
 export class UpdatePatientsComponent implements OnInit {

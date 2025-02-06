@@ -1,14 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { NgxSonnerToaster } from 'ngx-sonner';
-import { ThemeService } from './core/services/theme.service';
-import { ResponsiveHelperComponent } from './shared/components/responsive-helper/responsive-helper.component';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, ResponsiveHelperComponent, NgxSonnerToaster ],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

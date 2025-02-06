@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 export class FicheMedicalComponent implements OnInit {
   fiche_medical: fiche_medical[] | undefined;
     EnteredID!:number;
+    userRole: string | null = null;
 
     constructor(private employeeService: ServiceCompletService,  private router: Router) {
   this.fiche_medical = [];
@@ -21,6 +22,7 @@ export class FicheMedicalComponent implements OnInit {
 
      ngOnInit(): void {
       this.getfiche_medical()
+      this.userRole = localStorage.getItem('roles');
       // this.getPatients(); // Chargez les patients au démarrage du composant
     }
 

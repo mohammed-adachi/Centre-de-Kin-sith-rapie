@@ -54,11 +54,11 @@ export class JwtService {
     }
   }
 
-  public getRoles(): any[] {
+  public getRoles(): string | null {
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       const roles = localStorage.getItem('roles');
       return roles ? JSON.parse(roles) : [];
     }
-    return [];
+    return null;
   }
 }

@@ -22,6 +22,13 @@ export class ServiceCompletService {
   getPatients(): Observable<Patient[]>{
     return this.http.get<Patient[]>(`${this.baseURL}/patient`);
   }
+  getficheById_patients(id: number): Observable<fiche_medical[]>{
+    return this.http.get<fiche_medical[]>(`${this.baseURL}/fiche/${id}`);
+  }
+  registerFiche(id: number,signRequest: any,httpOptions:any): Observable<any>{
+    console.log(signRequest);
+    return  this.http.post(`${this.baseURL}/register_fiche-medical/${id}`,signRequest);
+  }
   rendez_vous(): Observable<Appointment[]>{
     return this.http.get<Appointment[]>(`${this.baseURL}/rendezvous`);
   }

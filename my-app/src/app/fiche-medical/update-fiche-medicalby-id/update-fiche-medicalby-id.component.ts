@@ -6,13 +6,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { fiche_medical } from '../../shared/models';
 import { CommonModule } from '@angular/common';
 @Component({
-  selector: 'app-update-fiche-medical',
+  selector: 'app-update-fiche-medicalby-id',
   standalone: true,
   imports: [ReactiveFormsModule,CommonModule],
-  templateUrl: './update-fiche-medical.component.html',
-  styleUrl: './update-fiche-medical.component.css'
+  templateUrl: './update-fiche-medicalby-id.component.html',
+  styleUrl: './update-fiche-medicalby-id.component.css'
 })
-export class UpdateFicheMedicalComponent implements OnInit {
+export class UpdateFicheMedicalbyIdComponent implements OnInit {
   updatePaymentForm!: FormGroup;
   formResult: string = "";
 id:number;
@@ -31,6 +31,7 @@ patient:fiche_medical=new fiche_medical();
     this.id = this.route.snapshot.params['id'];
     this.updatePaymentForm = this.fb.group({
       description: ['', Validators.required],
+
 
     });
   }

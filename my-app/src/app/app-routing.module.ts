@@ -6,12 +6,13 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { authGuard } from './auth.guard';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 
 const routes: Routes = [
   { path: "register", component: RegisterComponent },
-  {path: 'dashbord',  component: HeaderComponent, canActivate: [authGuard] },
   {path: 'login', component: LoginComponent},
+
 
 ];
 

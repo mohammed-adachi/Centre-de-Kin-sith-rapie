@@ -55,7 +55,13 @@ export class LoginComponent implements OnInit {
             if (response.roles === 'DOCTOR') {
               localStorage.setItem('isAdmin', 'true');
               this.router.navigate(['/fiche']);
-            } else {
+            }else if(response.roles === 'SECRETARY') {
+              localStorage.setItem('isAdmin', 'true');
+              this.router.navigate(['/rendez_vous']);
+
+            }
+
+            else {
               localStorage.setItem('isAdmin', 'false');
               this.router.navigate(['/dashbord']);
             }

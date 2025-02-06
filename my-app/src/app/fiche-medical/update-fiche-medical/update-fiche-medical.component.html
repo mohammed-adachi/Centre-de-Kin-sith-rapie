@@ -1,51 +1,34 @@
-<p>register-fiche-medical works!</p>
-<p>register-payment works!</p>
-<p>register-payments works!</p>
-<div class="container my-5">
-  <h2 class="mb-4">Coordonnées de paiement</h2>
+
+<div class="container mx-auto my-5 p-6 max-w-2xl bg-white rounded-lg shadow-md">
+  <h2 class="text-2xl font-bold mb-6 text-gray-800">Coordonnées de paiement</h2>
 
   <form [formGroup]="updatePaymentForm" (ngSubmit)="submitForm()">
-    <!-- Payment ID Field -->
-
-
-
-    <!-- Amount Field -->
-    <div class="form-group mb-3">
-      <label for="description">description</label>
+    <!-- Champ Description -->
+    <div class="mb-6">
+      <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
       <input
         type="text"
         formControlName="description"
         id="description"
-        class="form-control"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        placeholder="Entrez la description"
       />
-      <div class="text-danger" >
-         description est requis.
+      <!-- Message d'erreur pour la description -->
+      <div *ngIf="updatePaymentForm.get('description')?.invalid && updatePaymentForm.get('description')?.touched" class="text-red-500 text-sm mt-1">
+        La description est requise.
       </div>
     </div>
-    <div class="form-group mb-3">
-      <label for="patient_id">ID du patient</label>
-      <input
-        type="number"
-        formControlName="patient_id"
-        id="patient_id"
-        class="form-control"
-      />
-      <div class="text-danger" >
-        L'ID du patient est requis.
-      </div>
-    </div>
-    <!-- Patient ID Field -->
+
+    <!-- Champ ID du patient -->
 
 
-    <!-- Submit Button -->
+    <!-- Bouton de soumission -->
     <button
       type="submit"
-      class="btn btn-primary"
       [disabled]="updatePaymentForm.invalid"
-
+      class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-blue-300"
     >
       Soumettre
     </button>
   </form>
 </div>
-

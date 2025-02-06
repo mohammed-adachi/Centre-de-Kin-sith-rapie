@@ -1,14 +1,5 @@
-import { Injectable } from '@angular/core';
-import {
-  CanActivate,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  UrlTree,
-  Router,
-} from '@angular/router';
-import { Observable } from 'rxjs';
-import { JwtService } from './service/jwt.service';
-import { ServiceCompletService } from './service-complet.service';
+import { Injectable } from "@angular/core";
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from "@angular/router";
 
 @Injectable({
   providedIn: 'root',
@@ -18,33 +9,44 @@ export class authGuard implements CanActivate {
   constructor(private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    // Vérifier si on est dans un environnement navigateur avant d'utiliser `window`
-    if (typeof window !== 'undefined' && localStorage.getItem('token')) {
-      const userRole = localStorage.getItem('roles');
-       console.log(userRole);
-      // Récupérer l'URL demandée
-      const requestedPath = state.url;
-      console.log(requestedPath);
-
-
-      // Vérifier le rôle et autoriser l'accès en conséquence
-      if (userRole === 'DOCTOR') {
-        // Routes autorisées pour DOCTOR
-        const allowedRoutesForDoctor = ['/dashbord', '/fiche', '/patients'];
-        if (allowedRoutesForDoctor.includes(requestedPath)) {
-          return true; // Autoriser l'accès
-        }
-
-    // Rediriger l'utilisateur s'il n'est pas authentifié
     if (typeof window !== 'undefined') {
-      this.router.navigate(['/forbidden']);
+      console.log(localStorage.getItem('roles'));
+
+      const token = localStorage.getItem('token');
+      const userRole = localStorage.getItem('roles');
+      const requestedPath = state.url;
+
+      if (token) {
+        if (userRole === 'DOCTOR') {
+
+          const allowedRoutesForDoctor = ['/dashboard', '/fiche', '/patient','/forbidden','/register_fichemedicalbyID','/update_fichemedicalBY_ID/:id'];
+          if (allowedRoutesForDoctor.some(route => requestedPath.startsWith(route))) {
+            return true;
+          }
+          else {
+            this.router.navigate(['/forbidden']);
+            return false;
+          }
+
+          }
+
+        else if (localStorage.getItem('roles') === 'SECRETARY') {
+          const allowedRoutesForSecretary = ['/dashboard', '/patient', '/rendez_vous', '/salles', '/payment','/forbidden','/viewficheMedical/:id'];
+          if (allowedRoutesForSecretary.some(route => requestedPath.startsWith(route))) {
+            return true;
+          }
+          else {
+            this.router.navigate(['/forbidden']);
+            return false;
+          }
+        } }
+      }
+
+      // Rediriger vers /login si l'utilisateur n'est pas authentifié
+      this.router.navigate(['/register']);
+      return false;
     }
 
-    return false;
+
   }
 
-
-}
-return false;
-  }
-}
