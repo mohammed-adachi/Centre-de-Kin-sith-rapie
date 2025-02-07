@@ -19,6 +19,21 @@ import { PublicLayoutComponent } from './public-layout/public-layout.component';
 import { PrivateLayoutComponent } from './private-layout/private-layout.component';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BaseChartDirective  } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
+
+
+// Importer le module
+
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 
 
@@ -29,8 +44,11 @@ import { MatIconModule } from '@angular/material/icon';
     RegisterComponent,
     _AuthComponent,
     LoginComponent,
+    FullCalendarModule,
     MatFormFieldModule,
+    BaseChartDirective ,// Import du module
     MatInputModule,
+    NgChartsModule,
     MatError,
     PublicLayoutComponent,
     PrivateLayoutComponent,

@@ -1,8 +1,102 @@
-<nav>
-  <a routerLink="/dashboard">Tableau de bord</a>
-  <a routerLink="/patients">Patients</a>
-  <a routerLink="/fiche" >Fiche</a>
-  <a routerLink="/rendez_vous" >Rendez-vous</a>
-  <a routerLink="/paiements" >Paiements</a>
-  <button (click)="logout()">Déconnexion</button>
-</nav>
+<div class="header-container bg-indigo-700 text-white p-4">
+  <div class="flex justify-between items-center">
+    <div class="text-2xl font-semibold">Medical Dashboard</div>
+    <div class="flex items-center space-x-6">
+      <!-- Statistique: Nombre de patients -->
+      <div class="stat-item bg-white text-indigo-700 p-3 rounded-lg shadow-lg">
+        <div class="text-lg font-medium">Patients</div>
+        <div class="text-xl font-bold">{{ statistics.patientsCount }}</div>
+      </div>
+
+      <!-- Statistique: Nombre de rendez-vous -->
+      <div class="stat-item bg-white text-indigo-700 p-3 rounded-lg shadow-lg">
+        <div class="text-lg font-medium">Rendez-vous</div>
+        <div class="text-xl font-bold">{{ statistics.appointmentsCount }}</div>
+      </div>
+
+      <!-- Statistique: Nombre de paiements -->
+      <div class="stat-item bg-white text-indigo-700 p-3 rounded-lg shadow-lg">
+        <div class="text-lg font-medium">Paiements</div>
+        <div class="text-xl font-bold">{{ statistics.paymentCount }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Section des Graphiques -->
+<div class="charts-container p-4 bg-white mt-4 shadow-lg rounded-lg">
+  <h3 class="text-xl font-semibold mb-4">Statistiques Visuelles</h3>
+
+  <!-- Grille pour les graphiques -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- Graphique circulaire pour la répartition -->
+    <div class="chart-card bg-gray-50 p-4 rounded-lg shadow-sm">
+      <h4 class="text-lg font-semibold mb-2">Répartition des prestations</h4>
+      <div class="chart-container">
+        <canvas
+          baseChart
+          [datasets]="pieChartData.datasets"
+          [labels]="pieChartData.labels"
+          [options]="pieChartOption"
+        >
+        </canvas>
+      </div>
+    </div>
+
+    <!-- Graphique à barres pour les patients -->
+    <div class="chart-card bg-gray-50 p-4 rounded-lg shadow-sm">
+      <h4 class="text-lg font-semibold mb-2">Patients par mois</h4>
+      <div class="chart-container">
+        <canvas
+          baseChart
+          [datasets]="barChartData.datasets"
+          [labels]="barChartData.labels"
+          [options]="barChartOptions"
+        >
+        </canvas>
+      </div>
+    </div>
+
+    <!-- Graphique à barres pour le nombre de lits par salle -->
+    <div class="chart-card bg-gray-50 p-4 rounded-lg shadow-sm">
+      <h4 class="text-lg font-semibold mb-2">Lits par salle</h4>
+      <div class="chart-container">
+        <canvas
+          baseChart
+          [datasets]="bedsPerRoomChartData.datasets"
+          [labels]="bedsPerRoomChartData.labels"
+          [options]="barChartOptions"
+        >
+        </canvas>
+      </div>
+    </div>
+
+    <!-- Graphique à barres pour les clients ayant payé -->
+    <div class="chart-card bg-gray-50 p-4 rounded-lg shadow-sm">
+      <h4 class="text-lg font-semibold mb-2">Clients ayant payé</h4>
+      <div class="chart-container">
+        <canvas
+          baseChart
+          [datasets]="paidClientsChartData.datasets"
+          [labels]="paidClientsChartData.labels"
+          [options]="barChartOptions"
+        >
+        </canvas>
+      </div>
+    </div>
+  </div>
+  <div class="charts-container p-4 bg-white mt-4 shadow-lg rounded-lg">
+    <h3 class="text-xl font-semibold mb-4">Répartition des lits par salle</h3>
+    <div class="chart-card bg-gray-50 p-4 rounded-lg shadow-sm">
+      <div class="chart-container">
+        <canvas
+          baseChart
+          [datasets]="bedsPerRoomPieChartData.datasets"
+          [labels]="bedsPerRoomPieChartData.labels"
+          [options]="pieChartOptions"
+        >
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>

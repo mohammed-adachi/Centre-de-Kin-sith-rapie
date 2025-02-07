@@ -1,61 +1,65 @@
-<p>register-ressources works!</p>
-<p>register-prestation works!</p>
-<div class="container my-5">
-  <h2 class="mb-4">Un prestation</h2>
+<div class="container mx-auto px-4 py-8">
 
-  <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
-    <!-- Name Field -->
-    <div class="form-group mb-3">
-      <label for="name">Nom</label>
-      <input
-        type="text"
-        formControlName="name"
-        id="name"
-        class="form-control"
-      />
-      <div class="text-danger">
-        Le nom est requis.
+  <div class="max-w-xl mx-auto bg-white shadow-md rounded-lg p-6">
+    <h2 class="text-2xl font-bold mb-6 text-gray-800">Ajouter une Prestation</h2>
+
+    <form [formGroup]="registerForm" (ngSubmit)="submitForm()" class="space-y-4">
+      <!-- Name Field -->
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Nom</label>
+        <input
+          type="text"
+          formControlName="name"
+          id="name"
+          class="w-full px-3 text-black py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched"
+             class="text-red-500 text-sm mt-1">
+          Le nom est requis.
+        </div>
       </div>
-    </div>
 
-    <!-- Date of Birth Field -->
-    <div class="form-group mb-3">
-      <label for="type">nombre_machines</label>
-      <input
-        type="number"
-        formControlName="nombre_machines"
-        id="nombre_machines"
-        class="form-control"
-      />
-      <div class="text-danger">
-        nombre machines
+      <!-- Nombre Machines Field -->
+      <div>
+        <label for="nombre_machines" class="block text-sm font-medium text-gray-700 mb-2">Nombre de Machines</label>
+        <input
+          type="number"
+          formControlName="nombre_machines"
+          id="nombre_machines"
+          class="w-full px-3 text-black py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <div *ngIf="registerForm.get('nombre_machines')?.invalid && registerForm.get('nombre_machines')?.touched"
+             class="text-red-500 text-sm mt-1">
+          Nombre de machines requis
+        </div>
       </div>
-    </div>
 
-    <!-- Address Field -->
-    <div class="form-group mb-3">
-      <label for="tarif">nombre_lits</label>
-      <input
-        type="number"
-        formControlName="nombre_lits"
-        id="nombre_lits"
-        class="form-control"
-      />
-      <div class="text-danger">
-        nombre_lits est requise.
+      <!-- Nombre Lits Field -->
+      <div>
+        <label for="nombre_lits" class="block text-sm font-medium text-gray-700 mb-2">Nombre de Lits</label>
+        <input
+          type="number"
+          formControlName="nombre_lits"
+          id="nombre_lits"
+          class="w-full px-3 py-2 text-black border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <div *ngIf="registerForm.get('nombre_lits')?.invalid && registerForm.get('nombre_lits')?.touched"
+             class="text-red-500 text-sm mt-1">
+          Nombre de lits requis
+        </div>
       </div>
-    </div>
 
-    <!-- Phone Field -->
-
-
-    <!-- Submit Button -->
-    <button
-      type="submit"
-      class="btn btn-primary"
-      [disabled]="registerForm.invalid"
-    >
-      submit
-    </button>
-  </form>
+      <!-- Submit Button -->
+      <div>
+        <button
+          type="submit"
+          [disabled]="registerForm.invalid"
+          class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition-colors
+                 disabled:bg-gray-400 disabled:cursor-not-allowed"
+        >
+          Soumettre
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

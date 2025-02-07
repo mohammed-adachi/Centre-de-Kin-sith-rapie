@@ -3,10 +3,11 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { ServiceCompletService } from '../../service-complet.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router'
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-register-ressources',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './register-ressources.component.html',
   styleUrl: './register-ressources.component.css'
 })

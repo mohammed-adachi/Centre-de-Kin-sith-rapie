@@ -4,10 +4,11 @@ import { ServiceCompletService } from '../../service-complet.service';
 import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Salle } from '../../shared/models';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-update-ressources',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './update-ressources.component.html',
   styleUrl: './update-ressources.component.css'
 })
@@ -29,7 +30,7 @@ Salle:Salle=new Salle();
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.registerForm = this.fb.group({
-      name: ['', Validators.required],
+      // name: ['', Validators.required],
       nombre_lits: ['', Validators.required],
       nombre_machines: ['', Validators.required]
     });
