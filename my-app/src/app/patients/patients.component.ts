@@ -82,5 +82,7 @@ export class PatientsComponent implements OnInit {
   viewRnedez_vous(id: number) {
     this.router.navigate(['viewRendez_vous', id]);
   }
-
+  viewpaiement(id: number) {
+    this.router.navigate(['viewpaiement', id]);
+  }
 }

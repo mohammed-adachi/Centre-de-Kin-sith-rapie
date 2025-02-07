@@ -25,9 +25,24 @@ export class ServiceCompletService {
   getficheById_patients(id: number): Observable<fiche_medical[]>{
     return this.http.get<fiche_medical[]>(`${this.baseURL}/fiche/${id}`);
   }
+  getrendezById_patients(id: number): Observable<Appointment[]>{
+    return this.http.get<Appointment[]>(`${this.baseURL}/get_rendez/${id}`);
+  }
+  postrendezvous(id: number, signRequest: any, httpOptions: any): Observable<any> {
+    console.log(signRequest)
+    return this.http.post(`${this.baseURL}/register_rendezvous/${id}`, signRequest);
+  }
+  registerpayByid(id: number, signRequest: any, httpOptions: any): Observable<any> {
+    console.log(signRequest)
+    return this.http.post(`${this.baseURL}/register_paye/${id}`, signRequest);
+  }
+
   registerFiche(id: number,signRequest: any,httpOptions:any): Observable<any>{
     console.log(signRequest);
     return  this.http.post(`${this.baseURL}/register_fiche-medical/${id}`,signRequest);
+  }
+  getpayementBuId(id: number): Observable<Payment[]>{
+    return this.http.get<Payment[]>(`${this.baseURL}/get_paiement/${id}`);
   }
   rendez_vous(): Observable<Appointment[]>{
     return this.http.get<Appointment[]>(`${this.baseURL}/rendezvous`);

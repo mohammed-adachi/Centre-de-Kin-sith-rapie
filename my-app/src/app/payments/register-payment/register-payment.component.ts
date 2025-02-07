@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import {  FormControl } from '@angular/forms';
+
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ServiceCompletService } from '../../service-complet.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register-payment',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,CommonModule,MatIconModule, ],
   templateUrl: './register-payment.component.html',
   styleUrl: './register-payment.component.css'
 })

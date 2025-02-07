@@ -1,4 +1,7 @@
 import { NgModule } from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatError } from '@angular/material/form-field';
 import { NgIf } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +18,7 @@ import { authGuard } from './auth.guard';
 import { PublicLayoutComponent } from './public-layout/public-layout.component';
 import { PrivateLayoutComponent } from './private-layout/private-layout.component';
 import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -25,6 +29,9 @@ import { RouterModule } from '@angular/router';
     RegisterComponent,
     _AuthComponent,
     LoginComponent,
+    MatFormFieldModule,
+    MatInputModule,
+    MatError,
     PublicLayoutComponent,
     PrivateLayoutComponent,
 
@@ -35,6 +42,7 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     ReactiveFormsModule,
     BrowserModule,
+    MatIconModule,
     RouterModule,
     FormsModule,
 

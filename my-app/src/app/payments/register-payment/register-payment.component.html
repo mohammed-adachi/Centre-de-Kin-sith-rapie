@@ -1,63 +1,61 @@
-<p>register-payment works!</p>
-<p>register-payments works!</p>
-<div class="container my-5">
-  <h2 class="mb-4">Coordonnées de paiement</h2>
+<div class="container mx-auto my-5 p-6 max-w-2xl bg-white rounded-lg shadow-md">
+  <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-3">Coordonnées de paiement</h2>
 
-  <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
-    <!-- Payment ID Field -->
-
-
-    <!-- Payment Date Field -->
-    <div class="form-group mb-3">
-      <label for="date">Date de paiement</label>
+  <form [formGroup]="registerForm" (ngSubmit)="submitForm()" class="space-y-6">
+    <!-- Champ Date de paiement -->
+    <div class="space-y-2">
+      <label for="date" class="block text-sm font-medium text-gray-700">Date de paiement</label>
       <input
         type="date"
         formControlName="date"
         id="date"
-        class="form-control"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        [class.border-red-500]="registerForm.get('date')?.invalid && registerForm.get('date')?.touched"
       />
-      <div class="text-danger" >
+      <div *ngIf="registerForm.get('date')?.invalid && registerForm.get('date')?.touched" class="text-red-500 text-sm mt-1">
         La date de paiement est requise.
       </div>
     </div>
 
-    <!-- Amount Field -->
-    <div class="form-group mb-3">
-      <label for="montant">Montant</label>
+    <!-- Champ Montant -->
+    <div class="space-y-2">
+      <label for="montant" class="block text-sm font-medium text-gray-700">Montant</label>
       <input
         type="number"
         formControlName="montant"
         id="montant"
-        class="form-control"
+        placeholder="Entrez le montant"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        [class.border-red-500]="registerForm.get('montant')?.invalid && registerForm.get('montant')?.touched"
       />
-      <div class="text-danger" >
+      <div *ngIf="registerForm.get('montant')?.invalid && registerForm.get('montant')?.touched" class="text-red-500 text-sm mt-1">
         Le montant est requis.
       </div>
     </div>
-    <div class="form-group mb-3">
-      <label for="patient_id">ID du patient</label>
+
+    <!-- Champ ID du patient -->
+    <div class="space-y-2">
+      <label for="patient_id" class="block text-sm font-medium text-gray-700">ID du patient</label>
       <input
         type="number"
         formControlName="patient_id"
         id="patient_id"
-        class="form-control"
+        placeholder="Entrez l'ID du patient"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        [class.border-red-500]="registerForm.get('patient_id')?.invalid && registerForm.get('patient_id')?.touched"
       />
-      <div class="text-danger" >
+      <div *ngIf="registerForm.get('patient_id')?.invalid && registerForm.get('patient_id')?.touched" class="text-red-500 text-sm mt-1">
         L'ID du patient est requis.
       </div>
     </div>
-    <!-- Patient ID Field -->
 
-
-    <!-- Submit Button -->
+    <!-- Bouton de soumission -->
     <button
       type="submit"
-      class="btn btn-primary"
       [disabled]="registerForm.invalid"
-      
+      class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 disabled:bg-blue-300"
     >
       Soumettre
     </button>
   </form>
 </div>
-

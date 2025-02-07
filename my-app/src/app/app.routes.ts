@@ -28,6 +28,11 @@ import { PrivateLayoutComponent } from './private-layout/private-layout.componen
 import { RegisterFicheMedicalbyIdComponent } from './fiche-medical/register-fiche-medicalby-id/register-fiche-medicalby-id.component';
 import { FicheMedicalbyIdComponent } from './fiche-medical/fiche-medicalby-id/fiche-medicalby-id.component';
 import { UpdateFicheMedicalbyIdComponent } from './fiche-medical/update-fiche-medicalby-id/update-fiche-medicalby-id.component';
+import { RegisterRendezvousIdComponent } from './appointments/register-rendezvous-id/register-rendezvous-id.component';
+import { RendezvousIdComponent } from './appointments/rendezvous-id/rendezvous-id.component';
+import { UpdateRendezvousIdComponent } from './appointments/update-rendezvous-id/update-rendezvous-id.component';
+import { ViewpaiemenByIDComponent } from './payments/viewpaiemen-by-id/viewpaiemen-by-id.component';
+import { RegisterpaiemenByIDComponent } from './payments/registerpaiemen-by-id/registerpaiemen-by-id.component';
 
 export const routes: Routes = [
   {
@@ -51,13 +56,18 @@ export const routes: Routes = [
       { path: 'dashbord', component: HeaderComponent   },
       { path: 'patient', component: PatientsComponent },
       { path: 'rendez_vous', component: AppointmentsComponent   },
+      {path:'register_rendezvousbyID/:id',component:RendezvousIdComponent },
+      {path:'update_RendezBY_ID/:id',component:UpdateRendezvousIdComponent },
+      {path:'viewRendez_vous/:id',component:RegisterRendezvousIdComponent },
       { path: 'salles', component: ResourcesComponent  },
+      {path : 'viewpaiement/:id', component:ViewpaiemenByIDComponent  },
       { path: 'payment', component: PaymentsComponent  },
       { path: 'fiche', component: FicheMedicalComponent  },
       {path:'viewficheMedical/:id',component:RegisterFicheMedicalbyIdComponent },
       {path:'update_fichemedicalBY_ID/:id', component:UpdateFicheMedicalbyIdComponent},
       { path: 'prestation', component: PrestationComponent },
       { path: 'updatePatient/:id', component: UpdatePatientsComponent },
+      {path:'register_payementbyID/:id',component:RegisterpaiemenByIDComponent },
       { path: 'patient-form', component: RegisterPatientsComponent },
       { path: 'register-payement', component: RegisterPaymentComponent },
       { path: 'updatePayment/:id', component: UpdatePaymentComponent },

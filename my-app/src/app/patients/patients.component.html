@@ -19,7 +19,7 @@
 
         <!-- Register Patient Button for Doctor -->
         <button
-          *ngIf="userRole === 'DOCTOR'"
+          *ngIf="userRole === 'SECRETARY'"
           (click)="registerPatient()"
           class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition duration-200 flex items-center space-x-2"
         >
@@ -81,6 +81,10 @@
                   (click)="viewficheMedical(patient.id)"
                   class="text-green-600 hover:text-green-900 bg-green-100 hover:bg-green-200 p-2 rounded-full transition duration-200"
                   title="Voir Fiche Médicale">view fiche</button>
+                  <button
+                  (click)="viewpaiement(patient.id)"
+                  class="text-green-600 hover:text-green-900 bg-green-100 hover:bg-green-200 p-2 rounded-full transition duration-200"
+                  title="paiament">paye</button>
               </ng-container>
 
               <!-- Doctor Action -->

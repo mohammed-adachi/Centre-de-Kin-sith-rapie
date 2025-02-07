@@ -2,40 +2,45 @@ import { Component,OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ServiceCompletService } from '../../service-complet.service';
 import { HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { fiche_medical } from '../../shared/models';
 import { CommonModule } from '@angular/common';
 @Component({
-  selector: 'app-register-patients',
+  selector: 'app-rendezvous-id',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule],
-  templateUrl: './register-patients.component.html',
+  imports: [CommonModule,ReactiveFormsModule],
+  templateUrl: './rendezvous-id.component.html',
+  styleUrl: './rendezvous-id.component.css'
 })
-export class RegisterPatientsComponent implements OnInit {
-  registerForm!: FormGroup;
+export class RendezvousIdComponent implements OnInit {
+  updateAppointmentForm!: FormGroup;
   formResult: string = "";
-
+id:number;
+patient:fiche_medical=new fiche_medical();
   constructor(
     private service: ServiceCompletService, // Remplacez `EmployeeService` par le service pour les patients.
-    private fb: FormBuilder,
-    private router: Router
-  ) {}
+    private route: ActivatedRoute,
+    private router: Router,
+    private fb: FormBuilder
+  ) {
+    this.id=0;
+
+  }
 
   ngOnInit(): void {
-    this.registerForm = this.fb.group({
-      name: ['', Validators.required],
-      date_of_birth: ['', Validators.required],
-      adress: ['', Validators.required],
-      telephone: [
-        '',
-        [Validators.required, Validators.pattern("^[0-9]{10}$")] // Validation pour un numéro à 10 chiffres.
-      ]
+    this.id = this.route.snapshot.params['id'];
+    this.updateAppointmentForm = this.fb.group({
+      date: [null, Validators.required],
+      time: [null, Validators.required],
+      location: [null, Validators.required],
+
     });
   }
 
   submitForm() {
     console.log("Soumission du formulaire");
 
-    const formValues = this.registerForm.value;
+    const formValues = this.updateAppointmentForm.value;
     console.log(formValues);
 
     // Options HTTP avec en-tête Content-Type
@@ -45,7 +50,7 @@ export class RegisterPatientsComponent implements OnInit {
       })
     };
 
-    this.service.register_patients(formValues, httpOptions).subscribe({
+    this.service.postrendezvous(this.id,formValues,httpOptions).subscribe({
       next: (response) => {
         console.log(response); // Vérifie la réponse
         if (response.name != null) {
@@ -58,8 +63,7 @@ export class RegisterPatientsComponent implements OnInit {
       complete: () => {
         console.log("Souscription terminée.");
       }
-    }
-  );
+    });
   }
   goTopatient(): void {
     this.router.navigateByUrl('/patient').then(success => {
@@ -68,7 +72,6 @@ export class RegisterPatientsComponent implements OnInit {
       } else {
         console.error('Échec de la redirection vers /login');
       }
-    });
-  }
+    });}
 
-}
+  }

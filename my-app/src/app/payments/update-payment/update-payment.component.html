@@ -1,48 +1,38 @@
-<p>update-payments works!</p>
-<div class="container my-5">
-  <h2 class="mb-4">Mise à jour d'un paiement</h2>
+<p class="text-center text-gray-600 text-lg">update-payments works!</p>
 
-  <form [formGroup]="updatePaymentForm" (ngSubmit)="submitForm()">
+<div class="max-w-lg mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+  <h2 class="text-2xl font-semibold mb-4 text-gray-800 text-center">
+    Mise à jour d'un paiement
+  </h2>
+
+  <form [formGroup]="updatePaymentForm" (ngSubmit)="submitForm()" class="space-y-4">
     <!-- Patient ID Field -->
-    <div class="form-group mb-3">
-      <label for="patient_id">ID du patient</label>
-      <input
-        type="number"
-        formControlName="patient_id"
-        id="patient_id"
-        class="form-control"
-        placeholder="Entrez l'ID du patient"
-      />
-      <div class="text-danger">
-        L'ID du patient est requis.
-      </div>
-    </div>
 
     <!-- Payment Amount Field -->
-    <div class="form-group mb-3">
-      <label for="amount">Montant</label>
+    <div>
+      <label for="montant" class="block text-sm font-medium text-gray-700">Montant</label>
       <input
         type="number"
         formControlName="montant"
         id="montant"
-        class="form-control"
+        class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
         placeholder="Entrez le montant"
       />
-      <div class="text-danger">
+      <div class="text-red-500 text-xs mt-1">
         Le montant est requis.
       </div>
     </div>
 
     <!-- Payment Date Field -->
-    <div class="form-group mb-3">
-      <label for="payment_date">Date</label>
+    <div>
+      <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
       <input
         type="date"
         formControlName="date"
         id="date"
-        class="form-control"
+        class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
       />
-      <div class="text-danger">
+      <div class="text-red-500 text-xs mt-1">
         La date est requise.
       </div>
     </div>
@@ -50,7 +40,7 @@
     <!-- Submit Button -->
     <button
       type="submit"
-      class="btn btn-primary"
+      class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300"
     >
       Mettre à jour le paiement
     </button>

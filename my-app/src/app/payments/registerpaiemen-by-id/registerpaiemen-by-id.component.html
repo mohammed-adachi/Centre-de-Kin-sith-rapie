@@ -1,0 +1,81 @@
+<div class="container mx-auto px-4 py-8 max-w-2xl">
+  <div class="bg-white shadow-md rounded-lg p-6">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-3">Coordonnées de Paiement</h2>
+
+    <form [formGroup]="updatePaymentForm" (ngSubmit)="submitForm()" class="space-y-6">
+      <!-- Service Selection -->
+      <div class="space-y-2">
+        <label for="service" class="block text-sm font-medium text-gray-700">
+          Service
+        </label>
+        <select
+          formControlName="service"
+          id="service"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+          (change)="onServiceChange($event)"
+        >
+          <option value="">Sélectionnez un service</option>
+          <option *ngFor="let service of services" [value]="service.montant">
+            {{ service.nom }} - {{ service.type }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Montant Field -->
+      <div class="space-y-2">
+        <label for="montant" class="block text-sm font-medium text-gray-700">
+          Montant (€)
+        </label>
+        <input
+          type="number"
+          formControlName="montant"
+          id="montant"
+          placeholder="Entrez le montant"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+          readonly
+        />
+      </div>
+
+      <!-- Date Field -->
+      <div class="space-y-2">
+        <label for="date" class="block text-sm font-medium text-gray-700">
+          Date de Paiement
+        </label>
+        <input
+          type="date"
+          formControlName="date"
+          id="date"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+        />
+      </div>
+
+      <!-- Méthode de Paiement Field -->
+      <div class="space-y-2">
+        <label for="methode" class="block text-sm font-medium text-gray-700">
+          Méthode de Paiement
+        </label>
+        <select
+          formControlName="methode"
+          id="methode"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+        >
+          <option value="">Sélectionnez une méthode</option>
+          <option value="carte">Carte Bancaire</option>
+          <option value="espece">Espèces</option>
+          <option value="virement">Virement Bancaire</option>
+        </select>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="flex justify-end">
+        <button
+          type="submit"
+          [disabled]="updatePaymentForm.invalid"
+          class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Soumettre
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
