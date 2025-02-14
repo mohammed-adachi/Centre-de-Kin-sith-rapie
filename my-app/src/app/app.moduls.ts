@@ -29,11 +29,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BaseChartDirective  } from 'ng2-charts';
 import { NgChartsModule } from 'ng2-charts';
-
+import { ButtonModule } from 'primeng/button';
 
 // Importer le module
 
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -50,6 +51,11 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     MatInputModule,
     NgChartsModule,
     MatError,
+    ButtonModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatButtonModule,
     PublicLayoutComponent,
     PrivateLayoutComponent,
 

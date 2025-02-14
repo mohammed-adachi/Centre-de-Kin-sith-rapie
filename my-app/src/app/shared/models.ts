@@ -42,6 +42,22 @@ this.name = "";
    this.nombre_lits = 0;
 
 }}
+export class user{
+  id!:number;
+  username!:string;
+  firstname!:string;
+  password!:string;
+  email!:string;
+  role!:string;
+  constructor(){
+    this.id=0;
+    this.username="";
+    this.firstname="";
+    this.email="";
+    this.role="";
+  }
+}
+
 
 // payment.model.ts
 export class Payment {

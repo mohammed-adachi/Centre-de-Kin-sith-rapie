@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Patient,Appointment, Salle, Payment, fiche_medical, prestation } from './shared/models';
+import { Patient,Appointment, Salle, Payment, fiche_medical, prestation, user } from './shared/models';
 import { JwtService } from './service/jwt.service';
 
 @Injectable({
@@ -12,6 +12,7 @@ export class ServiceCompletService {
 
   private baseURL = "http://localhost:8082/acount";
   private baseURLS = "http://localhost:8082/acount";
+  private baseURLSS = "http://localhost:8082/api/patients";
 
   constructor(private http: HttpClient,
     private userAuthService: JwtService,
@@ -178,5 +179,21 @@ export class ServiceCompletService {
     }
     return isMatch;
 
+}
+
+getPatients_count(): Observable<number> {
+  return this.http.get<number>(`${this.baseURLSS}/count`);
+}
+getRendezvous_count(): Observable<number> {
+  return this.http.get<number>(`${this.baseURLSS}/total_r`);
+}
+getpayemntTotal(): Observable<number> {
+  return this.http.get<number>(`${this.baseURLSS}/total`);
+}
+getsallelits(): Observable<Salle[]> {
+  return this.http.get<Salle[]>(`${this.baseURLSS}/salle/nombreSallesParLits`);
+}
+getCurrentUser(id: number): Observable<user> {
+  return this.http.get<user>(`${this.baseURL}/user/${id}`);
 }
 }

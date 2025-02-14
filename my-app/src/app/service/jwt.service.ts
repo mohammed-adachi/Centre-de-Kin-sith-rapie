@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JwtService {
   private isAuthenticated = false;
+  private userIdSource = new BehaviorSubject<number | null>(null);
+  userId$ = this.userIdSource.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -60,5 +62,13 @@ export class JwtService {
       return roles ? JSON.parse(roles) : [];
     }
     return null;
+  }
+
+  setUserId(id: number) {
+    localStorage.setItem('userId', id.toString()); // 🔥 Stocke l'ID dans localStorage
+    this.userIdSource.next(id);
+  }
+  getUserId() {
+    return this.userIdSource.value;
   }
 }

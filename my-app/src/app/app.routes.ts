@@ -33,6 +33,7 @@ import { RendezvousIdComponent } from './appointments/rendezvous-id/rendezvous-i
 import { UpdateRendezvousIdComponent } from './appointments/update-rendezvous-id/update-rendezvous-id.component';
 import { ViewpaiemenByIDComponent } from './payments/viewpaiemen-by-id/viewpaiemen-by-id.component';
 import { RegisterpaiemenByIDComponent } from './payments/registerpaiemen-by-id/registerpaiemen-by-id.component';
+import { ProfilrComponentComponent } from './user/profilr-component/profilr-component.component';
 
 export const routes: Routes = [
   {
@@ -55,6 +56,8 @@ export const routes: Routes = [
     children: [
       { path: 'dashbord', component: HeaderComponent   },
       { path: 'patient', component: PatientsComponent },
+      {path:'notifications',component:notificationsComponent },
+      {path :'profile/:id',component:ProfilrComponentComponent},
       { path: 'rendez_vous', component: AppointmentsComponent   },
       {path:'register_rendezvousbyID/:id',component:RendezvousIdComponent },
       {path:'update_RendezBY_ID/:id',component:UpdateRendezvousIdComponent },

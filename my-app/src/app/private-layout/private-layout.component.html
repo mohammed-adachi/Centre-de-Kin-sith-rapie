@@ -9,17 +9,15 @@
   <!-- Navbar -->
   <nav class="bg-gray-700 shadow-lg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-16">
+      <div class="flex justify-between h-16 items-center">
         <!-- Logo et titre -->
         <div class="flex items-center">
-          <div class="flex-shrink-0 flex items-center">
-            <img class="h-8 w-auto" [src]="imagePath" alt="Logo">
-            <span class="ml-2 text-xl font-semibold text-white">Medical App</span>
-          </div>
+          <img class="h-8 w-auto" [src]="imagePath" alt="Logo">
+          <span class="ml-2 text-xl font-semibold text-white">Medical App</span>
         </div>
 
-        <!-- Boutons de navigation -->
-        <div class="flex items-center space-x-4">
+        <!-- Section Profil et Notifications -->
+        <div class="relative flex items-center space-x-4">
           <!-- Bouton Notifications -->
           <button class="p-2 rounded-full hover:bg-gray-700 relative focus:outline-none focus:ring-2 focus:ring-white">
             <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
@@ -27,16 +25,29 @@
           </button>
 
           <!-- Menu Profil -->
-          <div class="relative">
-            <button class="flex items-center space-x-2 p-2 rounded-full hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-white">
+          <div class="relative" (mouseleave)="closeDropdown()">
+            <!-- Bouton Profil -->
+            <button class="flex items-center space-x-2 p-2 rounded-full hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-white"
+                    (click)="toggleDropdown($event)">
               <img class="h-8 w-8 rounded-full" [src]="imagePath" alt="Photo">
               <span class="text-gray-300">GB</span>
+              <span class="material-icons text-gray-300">arrow_drop_down</span>
             </button>
-            <!-- Bouton Déconnexion -->
-            <button (click)="logout()" class="absolute right-0 mt-2 w-32 bg-gray-800 text-gray-300 py-2 px-4 rounded-lg shadow-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-              Déconnexion
-            </button>
+
+            <!-- Dropdown Menu -->
+            <div  class="absolute right-0 mt-2 w-48 bg-gray-800 text-gray-300 rounded-lg shadow-lg" (click)="$event.stopPropagation()">
+              <a  [routerLink]="['/profile', userId]" class="block px-4 py-3 hover:bg-gray-700 hover:text-white rounded-t-lg transition-colors">
+                <span class="material-icons mr-3">person</span>
+                <span>Profile</span>
+              </a>
+
+              <button (click)="logout()" class="w-full text-left px-4 py-3 hover:bg-gray-700 hover:text-white rounded-b-lg transition-colors focus:outline-none">
+                <span class="material-icons mr-3">logout</span>
+                <span>Déconnexion</span>
+              </button>
+            </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -48,44 +59,31 @@
     <aside class="w-64 bg-gray-800 text-gray-300 shadow-lg">
       <div class="p-4">
         <nav class="space-y-3">
-          <!-- Dashboard -->
-          <a routerLink="/dashbord" class="flex items-center px-4 py-3 hover:bg-gray-700 hover:text-white rounded-lg transition-colors group">
+          <a routerLink="/dashbord" class="flex items-center px-4 py-3 hover:bg-gray-700 hover:text-white rounded-lg transition-colors">
             <span class="material-icons mr-3">dashboard</span>
             <span>Dashboard</span>
           </a>
-
-          <!-- Patients -->
-          <a routerLink="/patient" class="flex items-center px-4 py-3 hover:bg-gray-700 hover:text-white rounded-lg transition-colors group">
+          <a routerLink="/patient" class="flex items-center px-4 py-3 hover:bg-gray-700 hover:text-white rounded-lg transition-colors">
             <span class="material-icons mr-3">people</span>
             <span>Patients</span>
           </a>
-
-          <!-- Fiche Médicale -->
-          <a routerLink="/fiche" class="flex items-center px-4 py-3 hover:bg-gray-700 hover:text-white rounded-lg transition-colors group">
+          <a routerLink="/fiche" class="flex items-center px-4 py-3 hover:bg-gray-700 hover:text-white rounded-lg transition-colors">
             <span class="material-icons mr-3">assignment</span>
             <span>Fiche Médicale</span>
           </a>
-
-          <!-- Rendez-vous -->
-          <a routerLink="/rendez_vous" class="flex items-center px-4 py-3 hover:bg-gray-700 hover:text-white rounded-lg transition-colors group">
+          <a routerLink="/rendez_vous" class="flex items-center px-4 py-3 hover:bg-gray-700 hover:text-white rounded-lg transition-colors">
             <span class="material-icons mr-3">event</span>
             <span>Rendez-vous</span>
           </a>
-
-          <!-- Paiement -->
-          <a routerLink="/payment" class="flex items-center px-4 py-3 hover:bg-gray-700 hover:text-white rounded-lg transition-colors group">
+          <a routerLink="/payment" class="flex items-center px-4 py-3 hover:bg-gray-700 hover:text-white rounded-lg transition-colors">
             <span class="material-icons mr-3">payment</span>
             <span>Paiement</span>
           </a>
-
-          <!-- Salle -->
-          <a routerLink="/salles" class="flex items-center px-4 py-3 hover:bg-gray-700 hover:text-white rounded-lg transition-colors group">
+          <a routerLink="/salles" class="flex items-center px-4 py-3 hover:bg-gray-700 hover:text-white rounded-lg transition-colors">
             <span class="material-icons mr-3">meeting_room</span>
             <span>Salle</span>
           </a>
-
-          <!-- Notifications -->
-          <a routerLink="/notifications" class="flex items-center px-4 py-3 hover:bg-gray-700 hover:text-white rounded-lg transition-colors group">
+          <a routerLink="/notifications" class="flex items-center px-4 py-3 hover:bg-gray-700 hover:text-white rounded-lg transition-colors">
             <span class="material-icons mr-3">notifications</span>
             <span>Notifications</span>
             <span class="ml-auto bg-gray-600 text-white py-1 px-2 rounded-full text-xs">3</span>
@@ -102,3 +100,19 @@
     </main>
   </div>
 </body>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  .animate-fade-in {
+    animation: fade-in 0.2s ease-out forwards;
+  }
+</style>

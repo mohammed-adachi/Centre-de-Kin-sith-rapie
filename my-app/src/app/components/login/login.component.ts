@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   imagePath: string = "../assets/images/image.png";
   loginForm!: FormGroup;
   errorMessage: string = ''; // Pour afficher les messages d'erreur
-
+   idUser: number | undefined;
   constructor(
     private service: JwtService,
     private fb: FormBuilder,
@@ -49,6 +49,11 @@ export class LoginComponent implements OnInit {
           if (response.token && response.user && response.user.username && response.user.role) {
             console.log(response);
             const jwtToken = response.token;
+            this.idUser = response.user.id;
+            console.log("idUser",this.idUser);
+            if (this.idUser !== undefined) {
+              this.service.setUserId(this.idUser);
+            }
             const role =response.roles
             localStorage.setItem('token', jwtToken);
             localStorage.setItem('roles', role); // Convertir en tableau
