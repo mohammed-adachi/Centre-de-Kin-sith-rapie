@@ -3,10 +3,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { JwtService } from '../../service/jwt.service';
 import { Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,CommonModule],
  templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })

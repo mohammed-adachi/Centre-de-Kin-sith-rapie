@@ -1,5 +1,5 @@
 // private-layout.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { JwtService } from '../service/jwt.service';
 import { CommonModule } from '@angular/common';
@@ -29,21 +29,22 @@ export class PrivateLayoutComponent  implements OnInit  {
   // }
   isDropdownOpen = false; // Initialisation de la variable
 
-  toggleDropdown(event: Event) {
+  toggleDropdown(event: Event):void {
     event.stopPropagation();
     this.isDropdownOpen = !this.isDropdownOpen;
     // Inverser l'état du menu
   }
-  closeDropdownOnClickOutside(event: Event) {
-    const dropdown = document.querySelector('.dropdown-menu'); // Sélectionne le menu
-    if (dropdown && !dropdown.contains(event.target as Node)) {
-      this.isDropdownOpen = false; // Ferme uniquement si le clic est en dehors
-    }
-  }
+  // closeDropdownOnClickOutside(event: Event) {
+  //   const dropdown = document.querySelector('.dropdown-menu'); // Sélectionne le menu
+  //   if (dropdown && !dropdown.contains(event.target as Node)) {
+  //     this.isDropdownOpen = false; // Ferme uniquement si le clic est en dehors
+  //   }
+  // }
 
-  closeDropdown() {
-    this.isDropdownOpen = false; // Fermer le menu
+  closeDropdown(): void {
+    this.isDropdownOpen = false;
   }
+ 
 
 // getuser(id:number){
 //   this.employeeService.getUsersBy(id).subscribe(data => {
@@ -64,7 +65,7 @@ export class PrivateLayoutComponent  implements OnInit  {
 
    getIdUser(){
     this.employeeService.getCurrentUser(this.id).subscribe((data) => {
-      this.user = data;  
+      this.user = data;
     });
    }
 

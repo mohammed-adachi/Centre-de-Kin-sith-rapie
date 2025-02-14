@@ -196,4 +196,7 @@ getsallelits(): Observable<Salle[]> {
 getCurrentUser(id: number): Observable<user> {
   return this.http.get<user>(`${this.baseURL}/user/${id}`);
 }
+getRendezVousToday(): Observable<Appointment[]> {
+  return this.http.get<Appointment[]>(`${this.baseURLSS}/aujourdhui`);
+}
 }

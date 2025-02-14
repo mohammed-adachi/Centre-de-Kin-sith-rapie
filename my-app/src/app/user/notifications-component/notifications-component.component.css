@@ -1,0 +1,11 @@
+.notifications {
+  margin: 20px;
+}
+
+.notification {
+  background-color: #ffcccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-size: 1.2em;
+}

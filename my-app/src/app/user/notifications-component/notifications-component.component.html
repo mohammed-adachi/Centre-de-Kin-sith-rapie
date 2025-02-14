@@ -1,1 +1,11 @@
-<p>notifications-component works!</p>
+<div class="notifications">
+  <div *ngFor="let rendezVous of rendezVousList">
+    <div *ngIf="isRendezVousPassed(rendezVous)">
+      <p class="notification">
+        <strong>Rendez-vous passé!</strong><br>
+        Patient {{ rendezVous.patient.id }} - {{ rendezVous.patient.name }}<br>
+        À {{ rendezVous.time }} à {{ rendezVous.location }}.
+      </p>
+    </div>
+  </div>
+</div>

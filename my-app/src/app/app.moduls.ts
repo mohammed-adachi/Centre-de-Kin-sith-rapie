@@ -32,8 +32,13 @@ import { NgChartsModule } from 'ng2-charts';
 import { ButtonModule } from 'primeng/button';
 
 // Importer le module
-
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { CalendarOptions } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import frLocale from '@fullcalendar/core/locales/fr';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -64,6 +69,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FullCalendarModule,
     ReactiveFormsModule,
     BrowserModule,
     MatIconModule,
