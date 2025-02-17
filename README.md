@@ -1,63 +1,42 @@
-<<<<<<< HEAD
-# Centre-de-Kin-sith-rapie
-=======
-# MyAngularApp
+# Projet Full-Stack Spring Boot et Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.7.
+## Description
+Ce projet implémente une application full-stack avec Spring Boot pour le backend, Angular pour le frontend, et MySQL pour la base de données. Il comprend des fonctionnalités telles que l'authentification JWT, la gestion des rôles (Docteur et Secrétaire), et l'affichage de statistiques avec Chart.js.
 
-## Development server
+## Fonctionnalités
+- Authentification sécurisée avec JWT
+- Gestion des utilisateurs (Docteur et Secrétaire)
+- Affichage de statistiques via Chart.js
 
-To start a local development server, run:
+## Technologies utilisées
+- Backend : Spring Boot, Spring Security, JWT, JPA
+- Frontend : Angular, Tailwind CSS, Chart.js
+- Base de données : MySQL
 
-```bash
-ng serve
-```
+## Installation
+1. Clonez ce repository :  
+   `git clone https://github.com/mohammed-adachi/Centre-de-Kin-sith-rapie.git`
+   
+2. Configurez la base de données MySQL.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+3. Lancez le backend avec Spring Boot :  
+   `./mvnw spring-boot:run`
 
-## Code scaffolding
+4. Installez les dépendances du frontend :  
+   `npm install`
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+5. Démarrez le frontend avec Angular :  
+   `ng serve`
 
-```bash
-ng generate component component-name
-```
+## Captures d'écran
+![Capture](image-example.png)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Contribuer
+1. Fork ce repository.
+2. Crée une branche pour votre fonctionnalité : `git checkout -b feature/nom-de-la-fonctionnalite`.
+3. Committez vos changements : `git commit -m 'Ajout de la fonctionnalité X'`.
+4. Poussez la branche : `git push origin feature/nom-de-la-fonctionnalite`.
+5. Créez une Pull Request.
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
->>>>>>> my-angular-app/main
+## Licence
+Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE).
